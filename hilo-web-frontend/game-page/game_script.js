@@ -1,6 +1,11 @@
 let currentNumber;
 let score = 0;
 
+//link to home-page
+document.getElementById("homeButton").addEventListener("click", function() {
+    window.location.href = "/";
+});
+
 function startGame() {
     currentNumber = generateRandomNumber();
     document.getElementById("currentNumber").textContent = currentNumber;
