@@ -5,7 +5,8 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware to parse request body
-app.use(express.urlencoded({ extended: false }));
+//app.use(express.urlencoded({ extended: false }));
+// when doing backend chat don't recommend this
 
 // Define routes
 app.get('/', (req, res) => {
@@ -23,18 +24,7 @@ app.get('/signin', (req, res) => {
 app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, 'login-page', 'login.html'));
 });
-/*
-app.post('/login', (req, res) => {
-    // Here you would handle the login logic
-    const { username, password } = req.body;
-    // Example: Check if username and password match
-    if (username === 'admin' && password === 'password') {
-        res.send('Login successful!');
-    } else {
-        res.send('Invalid username or password.');
-    }
-});
-*/
+
 // Serve static files (like CSS and JavaScript)
 app.use(express.static(path.join(__dirname, 'home-page')));
 app.use(express.static(path.join(__dirname, 'game-page')));
