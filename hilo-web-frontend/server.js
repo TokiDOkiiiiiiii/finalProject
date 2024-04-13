@@ -16,10 +16,6 @@ app.get('/game', (req, res) => {
     res.sendFile(path.join(__dirname, 'game-page', 'game.html'));
 });
 
-app.get('/account', (req, res) => {
-    res.sendFile(path.join(__dirname, 'account-page', 'account.html'));
-});
-
 app.get('/signin', (req, res) => {
     res.sendFile(path.join(__dirname, 'signin-page', 'signin.html'));
 });
@@ -42,7 +38,6 @@ app.post('/login', (req, res) => {
 // Serve static files (like CSS and JavaScript)
 app.use(express.static(path.join(__dirname, 'home-page')));
 app.use(express.static(path.join(__dirname, 'game-page')));
-app.use(express.static(path.join(__dirname, 'account-page')));
 app.use(express.static(path.join(__dirname, 'signin-page')));
 app.use(express.static(path.join(__dirname, 'login-page')));
 
