@@ -6,9 +6,13 @@ module.exports = (req, res) => {
         res.redirect('/');
     }).catch((err) => {
         //console.error(err);
-        if (!req.body.username || !req.body.password) {
+        if (!req.body.username && !req.body.password) {
             return res.status(400).send("Please provide both username and password.");
-        } else {
+        } else if (!req.body.username) {
+            return res.status(400).send("Please provide username.");
+        } else if (!req.body.password) {
+            return res.status(400).send("Please provide password.");
+        }else {
             res.status(500).send("Something went wrong. Please try again later.");
         }
     });

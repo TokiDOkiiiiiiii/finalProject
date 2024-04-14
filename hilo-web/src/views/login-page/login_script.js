@@ -8,10 +8,18 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('loginForm').addEventListener('submit', function(event) {
         var username = document.getElementById('username').value;
         var password = document.getElementById('password').value;
-        if (!username || !password) {
+        if (!username && !password) {
             event.preventDefault();
             document.getElementById('error-message').innerHTML = "Please provide both username and password.";
             document.getElementById('username').classList.add('error-border');
+            document.getElementById('password').classList.add('error-border');
+        } else if (!username) {
+            event.preventDefault();
+            document.getElementById('error-message').innerHTML = "Please provide username.";
+            document.getElementById('username').classList.add('error-border');
+        } else if (!password) {
+            event.preventDefault();
+            document.getElementById('error-message').innerHTML = "Please provide password.";
             document.getElementById('password').classList.add('error-border');
         }
     });
