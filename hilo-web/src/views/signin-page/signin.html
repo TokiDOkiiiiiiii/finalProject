@@ -5,20 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signin</title>
     <link rel="stylesheet" href="signin_style.css">
+    <style>
+        .error {
+            color: red;
+        }
+        .error-border {
+            border: 2px solid red;
+        }
+    </style>
 </head>
 <body>
     <h1>Sign in</h1>
-    <form action="/signinForm" method="POST">
+    <form id="signinForm" action="/signinForm" method="POST">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username"><br><br>
         <label for="password">Password:</label>
         <input type="password" id="password" name="password"><br><br>
         <input type="submit" value="Sign in">
     </form>
-    <a href="/login">ALready have an account?</a>
+    <div id="error-message" class="error"></div>
+    <a href="/login">Already have an account?</a>
     <br>
     <button id="homeButton">Back to Home</button>
     <script src="signin_script.js"></script>
-    <script src="utils/link.js"></script>
 </body>
 </html>
