@@ -23,6 +23,7 @@ app.get('/game', viewController.game);
 app.get('/signin', viewController.signin);
 app.get('/login', viewController.login);
 app.post('/signinForm', storeUserController);
+app.post('/loginForm', storeUserController);
 
 // Serve static files (like CSS and JavaScript)
 app.use(express.static(__dirname + '/views/home-page'));
