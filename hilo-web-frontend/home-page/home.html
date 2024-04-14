@@ -1,15 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
     <link rel="stylesheet" href="home_style.css">
+    <style>
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animated {
+            animation: slideIn 0.5s ease forwards;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Welcome to the Home Page</h1>
-    <button id="gameButton">Game</button>
-    <button id="loginButton">Login or change account</button>
+    <h1 id="welcomeText" class="animated">
+        Welcome to
+    </h1>
+    <h2 id="hiLoHeader" class="animated">
+        HiLo 🎲
+    </h2>
+    <div id="buttonsContainer" class="animated">
+        <button id="gameButton">
+            Game
+        </button>
+        <button id="loginButton">
+            Login or change account
+        </button>
+    </div>
     <script src="home_script.js"></script>
+    <script>
+        function generateRandomEmoji() {
+            const emojiList = [
+                "🍕", "🍔", "🍟", "🍗", "🍖", "🌭", "🍲", "🍱", "🍣", "🍤", "🍙", "🍚",
+                "🍛", "🍜", "🍝", "🍠", "🍦", "🍩", "🍮", "🥗", "🥐", "🌯", "🌮", "🥪", "🥟"
+            ];
+            const randomIndex = Math.floor(Math.random() * emojiList.length);
+            return emojiList[randomIndex];
+        }
+
+        const welcomeText = document.getElementById("welcomeText");
+        const hiLoHeader = document.getElementById("hiLoHeader");
+        const buttonsContainer = document.getElementById("buttonsContainer");
+
+        function isInViewport(element) {
+            const rect = element.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+
+        function handleScroll() {
+            if (isInViewport(welcomeText)) {
+                welcomeText.classList.add('animated');
+            }
+            if (isInViewport(hiLoHeader)) {
+                hiLoHeader.classList.add('animated');
+            }
+            if (isInViewport(buttonsContainer)) {
+                buttonsContainer.classList.add('animated');
+            }
+
+            const randomEmoji = generateRandomEmoji();
+            const emojiSpan = document.createElement('span');
+            emojiSpan.textContent = randomEmoji;
+            hiLoHeader.appendChild(emojiSpan);
+
+            window.removeEventListener('scroll', handleScroll);
+        }
+
+        window.addEventListener('scroll', handleScroll);
+    </script>
 </body>
+
 </html>
