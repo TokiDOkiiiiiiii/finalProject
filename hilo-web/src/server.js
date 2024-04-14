@@ -8,8 +8,7 @@ const viewController = require('./controllers/viewController');
 const storeUserController = require('./controllers/storeUserController');
 
 // Middleware to parse request body
-//app.use(express.urlencoded({ extended: false }));
-// when doing backend chat don't recommend this
+app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 
 //.env
 require('dotenv').config();
