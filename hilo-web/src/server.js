@@ -8,8 +8,7 @@ const viewController = require('./controllers/viewController');
 const storeUserController = require('./controllers/storeUserController');
 
 // Middleware to parse request body
-//app.use(express.urlencoded({ extended: false }));
-// when doing backend chat don't recommend this
+app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 
 //.env
 require('dotenv').config();
@@ -23,6 +22,7 @@ app.get('/game', viewController.game);
 app.get('/signin', viewController.signin);
 app.get('/login', viewController.login);
 app.post('/signinForm', storeUserController);
+app.post('/loginForm', storeUserController);
 
 // Serve static files (like CSS and JavaScript)
 app.use(express.static(__dirname + '/views/home-page'));
