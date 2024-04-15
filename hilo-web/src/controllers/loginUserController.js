@@ -27,9 +27,11 @@ module.exports = (req, res) => {
 
                 res.redirect('/');
             } else {
+                //return res.status(400).send("Incorrect password");
                 res.redirect('/login');
             }
         } else {
+            //return res.status(400).send("User not found");
             res.redirect('/login');
         }
     }).catch(err => {
