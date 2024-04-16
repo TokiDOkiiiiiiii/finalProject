@@ -1,16 +1,26 @@
-let currentNumber;
-let score = 0;
+//Player structure = {"Username" : , "Password" : , "Score" : , "Ranking" : , "Stat" : }
+var basePlayer = {"Username" : "Username", "Password" : "Password", "Score" : 10, "Ranking" : 1, "rolling-Time" : 15, 
+'high-Mul' : 3, 'low-Mul' : 2, 'hilo-Mul' : 5, 'base-Add' : 0, 'auto-Dice' : 0};
+var clientPlayer = {"Username" : "Client", "Password" : "Password", "Score" : 100, "Ranking" : 12, "rolling-Time" : 5, 
+'high-Mul' : 12, 'low-Mul' : 11, 'hilo-Mul' : 14, 'base-Add' : 99, 'auto-Dice' : 1};
 
 //link to home-page
 document.getElementById("homeButton").addEventListener("click", function() {
     window.location.href = "/";
 });
 
+
+///Rule page is not implemented///
+//link to rule-page
+document.getElementById("ruleButton").addEventListener("click", function(){
+    window.location.href = "/rules";
+});
+
 //////////////
 //Added Part//
 //////////////
 let lastUpdate = 0;
-var timer = 1 * 1000;
+var timer = 15 * 1000;
 var startScramble = false;
 var finalAnswer = [5,5,5]
 var randomArray = [0, 0, 0]
@@ -20,11 +30,11 @@ var res = document.getElementById("result");
 var win = document.getElementById("winning-status");
 var bet = document.getElementById("bet-value");
 var gameState = document.getElementById("game-State");
+var hundredUpgradeStep = 10;
+
 
 function getRandomInt() {
-
     var ans = Math.floor(Math.random() * 6) + 1;
-    console.log(ans);
     return ans;
 }
 
@@ -55,11 +65,6 @@ document.getElementById("hilo-Btn").addEventListener("click", function(){
     choose = 1;
 });
 
-////////////////////////
-//Send money to server//
-////////////////////////
-
-//Server will command// startroll and stoproll
 document.getElementById("roll-Btn").addEventListener("click", function(){
     if (bet_value > 0){
         res.innerHTML = '';
@@ -72,6 +77,34 @@ document.getElementById("roll-Btn").addEventListener("click", function(){
         document.getElementById("timer-Text").innerHTML = timer;
     }
 });
+
+var gameStat = ['rolling-Time', 'high-Mul', 'low-Mul', 'hilo-Mul', 'base-Add', 'auto-Dice'];
+
+function upgrade(statType){
+    if (document.getElementById(statType).value < document.getElementById(statType).max && document.getElementById(statType + '-Btn').innerHTML <= clientPlayer.Score){
+        //Transaction and update to server
+        clientPlayer.Score -= document.getElementById(statType + '-Btn').innerHTML;
+        updateScore();
+        document.getElementById(statType).value = parseInt(document.getElementById(statType).value + 1, 10);
+        if (statType === 'auto-Dice' || statType === 'base-Add'){
+            clientPlayer[statType] = clientPlayer[statType] + 1;
+        }
+        else if (statType === 'rolling-Time'){
+            clientPlayer[statType] = (clientPlayer[statType] * hundredUpgradeStep - 1) / hundredUpgradeStep;   
+            timer = clientPlayer[statType] * 1000;
+        }
+        else {
+            clientPlayer[statType] = (clientPlayer[statType] * hundredUpgradeStep + 1) / hundredUpgradeStep;
+        }
+        if (document.getElementById(statType).value < document.getElementById(statType).max){
+            document.getElementById(statType + '-Btn').innerHTML = document.getElementById(statType).value * 10;
+        }
+        else {
+            document.getElementById(statType + '-Btn').innerHTML = 'max';
+        }
+        document.getElementById(statType + "-Text").innerHTML = clientPlayer[statType];
+    }
+}
 
 function displayTime(t){
     return Math.trunc((t - lastUpdate + 800)/ 1000);
@@ -89,8 +122,48 @@ const config = {
         
     }
 };
+function updateRank(){
+    document.getElementById("username").innerHTML = clientPlayer.Username + " Rank : " + clientPlayer.Ranking;
+}
+function updateScore(){
+    document.getElementById("score").innerHTML = clientPlayer.Score;
+}
+
+function loadPlayerData(){
+    //Username & Rank
+    updateRank();
+
+
+    //Score
+    updateScore();
+
+    //Stat
+    for (let i = 0; i < gameStat.length; i++){
+        var statType = gameStat[i];
+        document.getElementById(statType + '-Text').innerHTML = clientPlayer[statType];
+        
+        if (statType === 'auto-Dice' || statType === 'base-Add'){
+            document.getElementById(statType).value = clientPlayer[statType];
+        }
+        else if (statType === 'rolling-Time'){
+            document.getElementById(statType).value = Math.trunc(basePlayer[statType] - clientPlayer[statType]) * hundredUpgradeStep;
+            timer = clientPlayer[statType] * 1000;
+            console.log(clientPlayer[statType])
+        }
+        else {
+            document.getElementById(statType).value = Math.trunc(clientPlayer[statType] - basePlayer[statType]) * hundredUpgradeStep;
+        }
+        if (document.getElementById(statType).value < document.getElementById(statType).max){
+            document.getElementById(statType + '-Btn').innerHTML = document.getElementById(statType).value * 10;
+        }
+        else {
+            document.getElementById(statType + '-Btn').innerHTML = 'max';
+        }
+    }
+}
 
 function preload(){
+    loadPlayerData();
     this.load.image('DiceZero', 'FaceOfDice/zero.png');
     this.load.image('DiceOne', 'FaceOfDice/one.png');
     this.load.image('DiceTwo', 'FaceOfDice/two.png');
@@ -102,9 +175,11 @@ function preload(){
 
 var dicePosition = [[190, 150], [400, 150], [610,150]];
 var diceMap = {0 : 'DiceZero', 1 : 'DiceOne', 2 : 'DiceTwo', 3 : 'DiceThree', 4 : 'DiceFour', 5 : 'DiceFive', 6 : 'DiceSix'};
-var choose = 0;
+var choose = -1;
 var scale = 0.2
 var btn_list = ["hi-Btn", "lo-Btn", "hilo-Btn"];
+
+
 
 function create(){
     gameState.innerHTML = "IDLE";
@@ -115,14 +190,18 @@ function create(){
     //this.dice1.setTexture('DiceOne');
 }
 
-
+//If bet is larger than score
 function update(time, delta){
+    if (clientPlayer["auto-Dice"]){
+        startScramble = 1;
+        document.getElementById("roll-Btn").setAttribute("disabled", true);
+    }
 
     if (startScramble){
         lastUpdate += delta;
         document.getElementById("timer-Text").innerHTML = displayTime(timer);
-    
-        if (lastUpdate < timer){    //start roll (1)
+        
+        if (lastUpdate > timer / 2 && lastUpdate < timer){    
             gameState.innerHTML = "Rolling"
             for (let i = 0 ;i < 3; i++){
                 randomArray[i] = getRandomInt()
@@ -133,6 +212,7 @@ function update(time, delta){
         }
 
         else if (lastUpdate >= timer) {     //stop roll (2) after receive the final answer from server
+            var bonus = 1;
             gameState.innerHTML = "Idle"
             bet.removeAttribute("disabled");
             bet.value = '';
@@ -148,14 +228,17 @@ function update(time, delta){
             if (ans > 11){
                 res.innerHTML = 'High'
                 choice = 0;
+                bonus = clientPlayer["high-Mul"];
             }
             else if (ans == 11){
                 res.innerHTML = 'Hi-Lo'
                 choice = 1;
+                bonus = clientPlayer["hilo-Mul"];
             }
             else {
                 res.innerHTML = 'Low'
                 choice = 2;
+                bonus = clientPlayer["low-Mul"];
             }
             startScramble = false
             lastUpdate = 0;
@@ -165,15 +248,24 @@ function update(time, delta){
             ///////////////////////////////////
 
             if (choice == choose){
-                win.innerHTML = 'You win ' + bet_value;
+                win.innerHTML = 'You win ' + bet_value * bonus;
+            }
+            else if (choose == -1){
+                win.innerHTML = 'You did not bet';
+                bonus = 1;
             }
             else {
-                win.innerHTML = 'You lose ' + bet_value; 
+                win.innerHTML = 'You lose ' + bet_value;
+                bonus = 1;
             }
+            choose = -1;
             for (let i = 0; i < 3; i++){
                 document.getElementById(btn_list[i]).removeAttribute("disabled");
                 document.getElementById(btn_list[i]).style = "#000000"
-            }            
+            }
+            clientPlayer.Score += bet_value * bonus + clientPlayer["base-Add"] + ans;
+            updateScore();
+            bet_value = 0;
         }
     }
 }

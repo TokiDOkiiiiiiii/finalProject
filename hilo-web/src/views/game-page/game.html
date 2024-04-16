@@ -26,38 +26,44 @@
     
     <div class="container">
         <h1>Account Statistic</h1>
-        <h2>Rank : <span id = "ranking"></span></h2>
+        <h2 id = "username">Rank : </h2>
         <p>Score: <span id="score">0</span></p>
         <h2>Upgrade</h2>
 
         <label for="file">Rolling Time : </label>
         <progress id="rolling-Time" value="0" max="100" style = "display : inline"></progress>
-        <p id = "rollingTime-Text", style = "display: inline">0</p>
-        <button class = "upgrade-Btn" onclick = "upgrade('rolling-Time')">+</button>
+        <p id = "rolling-Time-Text", style = "display: inline">0</p>
+        <button class = "upgrade-Btn" id = "rolling-Time-Btn" = "upgrade('rolling-Time')">10</button>
         <br>
 
-        <label for="file">High Multiplier : </label>
+        <label for="file">Hi Multiplier : </label>
         <progress id="high-Mul" value="0" max="100" style = "display : inline"></progress>
-        <p id = "highMul-Text", style = "display: inline">0</p>
-        <button class = "upgrade-Btn" onclick = "upgrade('high-Mul')">+</button>
+        <p id = "high-Mul-Text", style = "display: inline">3</p>
+        <button class = "upgrade-Btn" id = "high-Mul-Btn" onclick = "upgrade('high-Mul')">10</button>
         <br>
 
-        <label for="file">Low Multiplier : </label>
+        <label for="file">Lo Multiplier : </label>
         <progress id="low-Mul" value="0" max="100" style = "display : inline"></progress>
-        <p id = "lowMul-Text", style = "display: inline">0</p>
-        <button class = "upgrade-Btn" onclick = "upgrade('low-Mul')">+</button>
+        <p id = "low-Mul-Text", style = "display: inline">2</p>
+        <button class = "upgrade-Btn" id = "low-Mul-Btn" onclick = "upgrade('low-Mul')">10</button>
         <br>
 
-        <label for="file">HiLo Multiplier : </label>
+        <label for="file">HiLo Multipler : </label>
         <progress id="hilo-Mul" value="0" max="100" style = "display : inline"></progress>
-        <p id = "hiloMul-Text", style = "display: inline">0</p>
-        <button class = "upgrade-Btn" onclick = "upgrade('hilo-Mul')">+</button>
+        <p id = "hilo-Mul-Text", style = "display: inline">5</p>
+        <button class = "upgrade-Btn" id = "hilo-Mul-Btn" onclick = "upgrade('hilo-Mul')">10</button>
         <br>
 
-        <label for="file">Base Adder : </label>
+        <label for="file">Base Addition : </label>
         <progress id="base-Add" value="0" max="100" style = "display : inline"></progress>
-        <p id = "baseAdd-Text", style = "display: inline">0</p>
-        <button class = "upgrade-Btn" onclick = "upgrade('base-Add')">+</button>
+        <p id = "base-Add-Text", style = "display: inline">0</p>
+        <button class = "upgrade-Btn" id = "base-Add-Btn" onclick = "upgrade('base-Add')">10</button>
+        <br>
+
+        <label for="file">Automa Dice : </label>
+        <progress id="auto-Dice" value="0" max="1" style = "display : inline"></progress>
+        <p id = "auto-Dice-Text", style = "display: inline">0</p>
+        <button class = "upgrade-Btn" id = "auto-Dice-Btn" onclick = "upgrade('auto-Dice')">1000</button>
         <br>
 
         <button id="ruleButton">Rules</button>
