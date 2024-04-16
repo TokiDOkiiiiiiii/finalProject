@@ -1,6 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
+    
 }
 
 .container {
@@ -19,6 +20,11 @@ button {
     cursor: pointer;
 }
 
+.upgrade-Btn{
+    margin: 5px;
+    padding: 5px 10px;
+}
+
 #result {
     font-weight: bold;
 }
@@ -26,5 +32,7 @@ button {
 canvas {   
     display : block;   
     margin : auto;
+    width : 100%;
+    height : 100%
     
 }

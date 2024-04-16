@@ -20,10 +20,50 @@
         <button id = "roll-Btn">Roll</button>
         <p id="result"></p>
         <p>Score: <span id="score">0</span></p>
-        <!-- <button onclick="restartGame()">Restart</button> -->
         <br>
         <button id="homeButton">Back to Home</button>
     </div>
+    
+    <div class="container">
+        <h1>Account Statistic</h1>
+        <h2>Rank : <span id = "ranking"></span></h2>
+        <p>Score: <span id="score">0</span></p>
+        <h2>Upgrade</h2>
+
+        <label for="file">Rolling Time : </label>
+        <progress id="rolling-Time" value="0" max="100" style = "display : inline"></progress>
+        <p id = "rollingTime-Text", style = "display: inline">0</p>
+        <button class = "upgrade-Btn" onclick = "upgrade('rolling-Time')">+</button>
+        <br>
+
+        <label for="file">High Multiplier : </label>
+        <progress id="high-Mul" value="0" max="100" style = "display : inline"></progress>
+        <p id = "highMul-Text", style = "display: inline">0</p>
+        <button class = "upgrade-Btn" onclick = "upgrade('high-Mul')">+</button>
+        <br>
+
+        <label for="file">Low Multiplier : </label>
+        <progress id="low-Mul" value="0" max="100" style = "display : inline"></progress>
+        <p id = "lowMul-Text", style = "display: inline">0</p>
+        <button class = "upgrade-Btn" onclick = "upgrade('low-Mul')">+</button>
+        <br>
+
+        <label for="file">HiLo Multiplier : </label>
+        <progress id="hilo-Mul" value="0" max="100" style = "display : inline"></progress>
+        <p id = "hiloMul-Text", style = "display: inline">0</p>
+        <button class = "upgrade-Btn" onclick = "upgrade('hilo-Mul')">+</button>
+        <br>
+
+        <label for="file">Base Adder : </label>
+        <progress id="base-Add" value="0" max="100" style = "display : inline"></progress>
+        <p id = "baseAdd-Text", style = "display: inline">0</p>
+        <button class = "upgrade-Btn" onclick = "upgrade('base-Add')">+</button>
+        <br>
+
+        <button id="ruleButton">Rules</button>
+    </div>
+    
+
     <script src="game_script.js"></script>
 </body>
 </html>

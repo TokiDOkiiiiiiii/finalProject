@@ -6,46 +6,6 @@ document.getElementById("homeButton").addEventListener("click", function() {
     window.location.href = "/";
 });
 
-// function startGame() {
-//     currentNumber = generateRandomNumber();
-//     document.getElementById("currentNumber").textContent = currentNumber;
-// }
-
-// function firstNumber() {
-//     return Math.floor(Math.random() * 6) + 1; // Random number between 1 and 100
-// }
-
-// function secondNumber() {
-//     return Math.floor(Math.random() * 6) + 1; // Random number between 1 and 100
-// }
-
-// function guess(higherOrLower) {
-//     const userGuess = parseInt(document.getElementById("userGuess").value);
-//     if (isNaN(userGuess)) {
-//         alert("Please enter a valid number.");
-//         return;
-//     }
-//     const nextNumber = generateRandomNumber();
-//     let result;
-//     if ((higherOrLower === "higher" && nextNumber > currentNumber) || (higherOrLower === "lower" && nextNumber < currentNumber)) {
-//         result = "Correct!";
-//         score++;
-//     } else {
-//         result = "Incorrect! Game over.";
-//         score = 0;
-//     }
-//     document.getElementById("result").textContent = result;
-//     document.getElementById("score").textContent = score;
-//     currentNumber = nextNumber;
-//     document.getElementById("currentNumber").textContent = currentNumber;
-// }
-
-// function restartGame() {
-//     score = 0;
-//     document.getElementById("score").textContent = score;
-//     startGame();
-// }
-
 //////////////
 //Added Part//
 //////////////
@@ -62,43 +22,37 @@ var bet = document.getElementById("bet-value");
 var gameState = document.getElementById("game-State");
 
 function getRandomInt() {
-    return Math.floor(Math.random() * 5) + 1;
+
+    var ans = Math.floor(Math.random() * 6) + 1;
+    console.log(ans);
+    return ans;
+}
+
+function resetBetButtonColor(){
+    for (let i = 0; i < 3; i++){
+        document.getElementById(btn_list[i]).style = '#000000';
+    }
 }
 
 document.getElementById("hi-Btn").addEventListener("click", function(){
+    resetBetButtonColor();
     bet_value = document.getElementById("bet-value").value;
-    if (bet_value > 0){
-        choose = 0;
-        document.getElementById("hi-Btn").style.backgroundColor = '#04AA6D';
-        for (let i = 0; i < 3; i++){
-            document.getElementById(btn_list[i]).setAttribute("disabled", true);
-        }
-        bet.setAttribute("disabled", true)
-    }
+    document.getElementById("hi-Btn").style.backgroundColor = '#04AA6D';
+    choose = 0;
 });
 
 document.getElementById("lo-Btn").addEventListener("click", function(){
+    resetBetButtonColor();
     bet_value = document.getElementById("bet-value").value;
-    if (bet_value > 0){
-        document.getElementById("lo-Btn").style.backgroundColor = '#04AA6D';
-        choose = 2;
-        for (let i = 0; i < 3; i++){
-            document.getElementById(btn_list[i]).setAttribute("disabled", true);
-        }
-        bet.setAttribute("disabled", true)
-    }
+    document.getElementById("lo-Btn").style.backgroundColor = '#04AA6D';
+    choose = 2;
 });
 
 document.getElementById("hilo-Btn").addEventListener("click", function(){
+    resetBetButtonColor();
     bet_value = document.getElementById("bet-value").value;
-    if (bet_value > 0){
-        document.getElementById("hilo-Btn").style.backgroundColor = '#04AA6D';
-        choose = 1;
-        for (let i = 0; i < 3; i++){
-            document.getElementById(btn_list[i]).setAttribute("disabled", true);
-        }
-        bet.setAttribute("disabled",true)
-    }
+    document.getElementById("hilo-Btn").style.backgroundColor = '#04AA6D';
+    choose = 1;
 });
 
 ////////////////////////
@@ -107,10 +61,16 @@ document.getElementById("hilo-Btn").addEventListener("click", function(){
 
 //Server will command// startroll and stoproll
 document.getElementById("roll-Btn").addEventListener("click", function(){
-    res.innerHTML = '';
-    win.innerHTML = '';
-    startScramble = true;
-    document.getElementById("timer-Text").innerHTML = timer;
+    if (bet_value > 0){
+        res.innerHTML = '';
+        win.innerHTML = '';
+        startScramble = true;
+        for (let i = 0; i < 3; i++){
+            document.getElementById(btn_list[i]).setAttribute("disabled", true);
+        }
+        bet.setAttribute("disabled",true)
+        document.getElementById("timer-Text").innerHTML = timer;
+    }
 });
 
 function displayTime(t){
@@ -120,7 +80,7 @@ function displayTime(t){
 const config = {
     type : Phaser.AUTO,
     width : 800,
-    height : 600,
+    height : 300,
     backgroundColor: '#4488aa',
     scene : {
         preload : preload,
@@ -140,7 +100,7 @@ function preload(){
     this.load.image('DiceSix', 'FaceOfDice/six.png');
 }
 
-var dicePosition = [[190, 300], [400, 300], [610,300]];
+var dicePosition = [[190, 150], [400, 150], [610,150]];
 var diceMap = {0 : 'DiceZero', 1 : 'DiceOne', 2 : 'DiceTwo', 3 : 'DiceThree', 4 : 'DiceFour', 5 : 'DiceFive', 6 : 'DiceSix'};
 var choose = 0;
 var scale = 0.2
@@ -220,5 +180,3 @@ function update(time, delta){
 
 let game = new Phaser.Game(config);
 
-// Start the game when the page loads
-// startGame();
