@@ -1,8 +1,8 @@
 //Player structure = {"Username" : , "Password" : , "Score" : , "Ranking" : , "Stat" : }
 var basePlayer = {"Username" : "Username", "Password" : "Password", "Score" : 10, "Ranking" : 1, "rolling-Time" : 15, 
 'high-Mul' : 3, 'low-Mul' : 2, 'hilo-Mul' : 5, 'base-Add' : 0, 'auto-Dice' : 0};
-var clientPlayer = {"Username" : "Client", "Password" : "Password", "Score" : 100, "Ranking" : 12, "rolling-Time" : 5, 
-'high-Mul' : 12, 'low-Mul' : 11, 'hilo-Mul' : 14, 'base-Add' : 99, 'auto-Dice' : 1};
+var clientPlayer = {"Username" : "Client", "Password" : "Password", "Score" : 100, "Ranking" : 0, "rolling-Time" : 15, 
+'high-Mul' : 3, 'low-Mul' : 2, 'hilo-Mul' : 5, 'base-Add' : 0, 'auto-Dice' : 0};
 
 //link to home-page
 document.getElementById("homeButton").addEventListener("click", function() {
@@ -66,16 +66,11 @@ document.getElementById("hilo-Btn").addEventListener("click", function(){
 });
 
 document.getElementById("roll-Btn").addEventListener("click", function(){
-    if (bet_value > 0){
+    
         res.innerHTML = '';
         win.innerHTML = '';
         startScramble = true;
-        for (let i = 0; i < 3; i++){
-            document.getElementById(btn_list[i]).setAttribute("disabled", true);
-        }
-        bet.setAttribute("disabled",true)
         document.getElementById("timer-Text").innerHTML = timer;
-    }
 });
 
 var gameStat = ['rolling-Time', 'high-Mul', 'low-Mul', 'hilo-Mul', 'base-Add', 'auto-Dice'];
@@ -182,7 +177,7 @@ var btn_list = ["hi-Btn", "lo-Btn", "hilo-Btn"];
 
 
 function create(){
-    gameState.innerHTML = "IDLE";
+    gameState.innerHTML = "WAITING";
     document.getElementById("timer-Text").innerHTML = displayTime(0);
     this.dice1 = this.add.image(dicePosition[0][0], dicePosition[0][1], 'DiceZero').setScale(scale);
     this.dice2 = this.add.image(dicePosition[1][0], dicePosition[1][1], 'DiceZero').setScale(scale);
@@ -192,6 +187,7 @@ function create(){
 
 //If bet is larger than score
 function update(time, delta){
+    //updateRank();
     if (clientPlayer["auto-Dice"]){
         startScramble = 1;
         document.getElementById("roll-Btn").setAttribute("disabled", true);
@@ -200,9 +196,27 @@ function update(time, delta){
     if (startScramble){
         lastUpdate += delta;
         document.getElementById("timer-Text").innerHTML = displayTime(timer);
+
         
-        if (lastUpdate > timer / 2 && lastUpdate < timer){    
+        if (lastUpdate > timer - 1000 && lastUpdate < timer){    
             gameState.innerHTML = "Rolling"
+            for (let i = 0; i < 3; i++){
+                document.getElementById(btn_list[i]).setAttribute("disabled", true);
+            }
+            bet.setAttribute("disabled",true)
+
+            //Locked the betting part
+            if (bet_value < 0 || bet_value > clientPlayer.Score){
+                bet_value = 0;
+                bet.value = 0;
+                resetBetButtonColor();
+                choose = -1;
+            }
+            clientPlayer.Score -= bet_value;
+            updateScore();
+            
+
+
             for (let i = 0 ;i < 3; i++){
                 randomArray[i] = getRandomInt()
             }
@@ -213,7 +227,7 @@ function update(time, delta){
 
         else if (lastUpdate >= timer) {     //stop roll (2) after receive the final answer from server
             var bonus = 1;
-            gameState.innerHTML = "Idle"
+            gameState.innerHTML = "WAITING"
             bet.removeAttribute("disabled");
             bet.value = '';
             let ans = 0;
