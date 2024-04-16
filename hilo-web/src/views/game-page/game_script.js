@@ -42,6 +42,7 @@ function resetBetButtonColor(){
     for (let i = 0; i < 3; i++){
         document.getElementById(btn_list[i]).style = '#000000';
     }
+    choose = -1;
 }
 
 document.getElementById("hi-Btn").addEventListener("click", function(){
@@ -66,12 +67,16 @@ document.getElementById("hilo-Btn").addEventListener("click", function(){
 });
 
 document.getElementById("roll-Btn").addEventListener("click", function(){
-    
-        res.innerHTML = '';
-        win.innerHTML = '';
         startScramble = true;
-        document.getElementById("timer-Text").innerHTML = timer;
+        document.getElementById("roll-Btn").setAttribute("disabled", true);
 });
+
+function base_price(statType){
+    if (statType === 'auto-Dice'){
+        return 1000;
+    }
+    else return 10;
+}
 
 var gameStat = ['rolling-Time', 'high-Mul', 'low-Mul', 'hilo-Mul', 'base-Add', 'auto-Dice'];
 
@@ -92,7 +97,7 @@ function upgrade(statType){
             clientPlayer[statType] = (clientPlayer[statType] * hundredUpgradeStep + 1) / hundredUpgradeStep;
         }
         if (document.getElementById(statType).value < document.getElementById(statType).max){
-            document.getElementById(statType + '-Btn').innerHTML = document.getElementById(statType).value * 10;
+            document.getElementById(statType + '-Btn').innerHTML = document.getElementById(statType).value * 10 + base_price(statType);
         }
         else {
             document.getElementById(statType + '-Btn').innerHTML = 'max';
@@ -102,7 +107,7 @@ function upgrade(statType){
 }
 
 function displayTime(t){
-    return Math.trunc((t - lastUpdate + 800)/ 1000);
+    return Math.trunc((t - lastUpdate + 999)/ 1000);
 }
 
 const config = {
@@ -143,13 +148,12 @@ function loadPlayerData(){
         else if (statType === 'rolling-Time'){
             document.getElementById(statType).value = Math.trunc(basePlayer[statType] - clientPlayer[statType]) * hundredUpgradeStep;
             timer = clientPlayer[statType] * 1000;
-            console.log(clientPlayer[statType])
         }
         else {
             document.getElementById(statType).value = Math.trunc(clientPlayer[statType] - basePlayer[statType]) * hundredUpgradeStep;
         }
         if (document.getElementById(statType).value < document.getElementById(statType).max){
-            document.getElementById(statType + '-Btn').innerHTML = document.getElementById(statType).value * 10;
+            document.getElementById(statType + '-Btn').innerHTML = document.getElementById(statType).value * 10 + base_price(statType);
         }
         else {
             document.getElementById(statType + '-Btn').innerHTML = 'max';
@@ -188,6 +192,7 @@ function create(){
 //If bet is larger than score
 function update(time, delta){
     //updateRank();
+    var i = 0;
     if (clientPlayer["auto-Dice"]){
         startScramble = 1;
         document.getElementById("roll-Btn").setAttribute("disabled", true);
@@ -198,7 +203,12 @@ function update(time, delta){
         document.getElementById("timer-Text").innerHTML = displayTime(timer);
 
         
-        if (lastUpdate > timer - 1000 && lastUpdate < timer){    
+        if (lastUpdate > timer - 1000 && lastUpdate < timer){  
+            if (i == 0){
+                clientPlayer.Score -= bet_value;
+                updateScore();
+                i++;
+            }  
             gameState.innerHTML = "Rolling"
             for (let i = 0; i < 3; i++){
                 document.getElementById(btn_list[i]).setAttribute("disabled", true);
@@ -206,14 +216,15 @@ function update(time, delta){
             bet.setAttribute("disabled",true)
 
             //Locked the betting part
-            if (bet_value < 0 || bet_value > clientPlayer.Score){
+            if (bet_value < 0 || bet_value > clientPlayer.Score || choose == -1){
+                console.log(bet_value);
+                console.log(clientPlayer.Score);
                 bet_value = 0;
                 bet.value = 0;
                 resetBetButtonColor();
                 choose = -1;
             }
-            clientPlayer.Score -= bet_value;
-            updateScore();
+            
             
 
 
@@ -226,6 +237,7 @@ function update(time, delta){
         }
 
         else if (lastUpdate >= timer) {     //stop roll (2) after receive the final answer from server
+            
             var bonus = 1;
             gameState.innerHTML = "WAITING"
             bet.removeAttribute("disabled");
@@ -272,16 +284,20 @@ function update(time, delta){
                 win.innerHTML = 'You lose ' + bet_value;
                 bonus = 1;
             }
-            choose = -1;
+            resetBetButtonColor();
             for (let i = 0; i < 3; i++){
                 document.getElementById(btn_list[i]).removeAttribute("disabled");
-                document.getElementById(btn_list[i]).style = "#000000"
+                
             }
             clientPlayer.Score += bet_value * bonus + clientPlayer["base-Add"] + ans;
             updateScore();
             bet_value = 0;
+            document.getElementById("roll-Btn").removeAttribute("disabled");
         }
+        
+        
     }
+    
 }
 
 let game = new Phaser.Game(config);
