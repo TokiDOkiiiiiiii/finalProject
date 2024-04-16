@@ -23,3 +23,8 @@ button {
     font-weight: bold;
 }
 
+canvas {   
+    display : block;   
+    margin : auto;
+    
+}

@@ -5,17 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HiLo Game</title>
     <link rel="stylesheet" href="game_style.css">
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script>
 </head>
 <body>
     <div class="container">
-        <h1>HiLo Game</h1>
-        <p>Current number: <span id="currentNumber"></span></p>
-        <p>Your guess: <input type="number" id="userGuess"></p>
-        <button onclick="guess('higher')">Higher</button>
-        <button onclick="guess('lower')">Lower</button>
+        <h1>HiLo Game : <span id = "game-State"></span></h1>
+        <p>Current result : <span id="result"></span> <span id = "winning-status"></span></p>
+        <p>Timer : <span id = "timer-Text"></span></p>
+        <p>Your bet : <input type="number" id="bet-value"></p>
+        <button id = "hi-Btn">Higher</button>
+        <button id = "lo-Btn">Lower</button>
+        <button id = "hilo-Btn">HiLo</button>
+        <br>
+        <button id = "roll-Btn">Roll</button>
         <p id="result"></p>
         <p>Score: <span id="score">0</span></p>
-        <button onclick="restartGame()">Restart</button>
+        <!-- <button onclick="restartGame()">Restart</button> -->
         <br>
         <button id="homeButton">Back to Home</button>
     </div>
