@@ -1,7 +1,7 @@
 //Player structure = {"Username" : , "Password" : , "Score" : , "Ranking" : , "Stat" : }
 var basePlayer = {"Username" : "Username", "Password" : "Password", "Score" : 10, "Ranking" : 1, "rolling-Time" : 15, 
 'high-Mul' : 3, 'low-Mul' : 2, 'hilo-Mul' : 5, 'base-Add' : 0, 'auto-Dice' : 0};
-var clientPlayer = {"Username" : "Client", "Password" : "Password", "Score" : 100, "Ranking" : 0, "rolling-Time" : 15, 
+var clientPlayer = {"Username" : "Client", "Password" : "Password", "Score" : 100, "Ranking" : 0, "rolling-Time" : 5, 
 'high-Mul' : 3, 'low-Mul' : 2, 'hilo-Mul' : 5, 'base-Add' : 0, 'auto-Dice' : 0};
 
 //link to home-page
@@ -25,6 +25,7 @@ var startScramble = false;
 var finalAnswer = [5,5,5]
 var randomArray = [0, 0, 0]
 var bet_value = 0;
+var i = 0;
 
 var res = document.getElementById("result");
 var win = document.getElementById("winning-status");
@@ -127,6 +128,7 @@ function updateRank(){
 }
 function updateScore(){
     document.getElementById("score").innerHTML = clientPlayer.Score;
+    console.log(clientPlayer.Score);
 }
 
 function loadPlayerData(){
@@ -192,7 +194,7 @@ function create(){
 //If bet is larger than score
 function update(time, delta){
     //updateRank();
-    var i = 0;
+    
     if (clientPlayer["auto-Dice"]){
         startScramble = 1;
         document.getElementById("roll-Btn").setAttribute("disabled", true);
@@ -205,6 +207,14 @@ function update(time, delta){
         
         if (lastUpdate > timer - 1000 && lastUpdate < timer){  
             if (i == 0){
+                if (bet_value < 0 || bet_value > clientPlayer.Score || choose == -1){
+                    console.log(bet_value);
+                    console.log(clientPlayer.Score);
+                    bet_value = 0;
+                    bet.value = 0;
+                    resetBetButtonColor();
+                    choose = -1;
+                }
                 clientPlayer.Score -= bet_value;
                 updateScore();
                 i++;
@@ -216,14 +226,7 @@ function update(time, delta){
             bet.setAttribute("disabled",true)
 
             //Locked the betting part
-            if (bet_value < 0 || bet_value > clientPlayer.Score || choose == -1){
-                console.log(bet_value);
-                console.log(clientPlayer.Score);
-                bet_value = 0;
-                bet.value = 0;
-                resetBetButtonColor();
-                choose = -1;
-            }
+            
             
             
 
@@ -278,11 +281,11 @@ function update(time, delta){
             }
             else if (choose == -1){
                 win.innerHTML = 'You did not bet';
-                bonus = 1;
+                bonus = 0;
             }
             else {
                 win.innerHTML = 'You lose ' + bet_value;
-                bonus = 1;
+                bonus = 0;
             }
             resetBetButtonColor();
             for (let i = 0; i < 3; i++){
