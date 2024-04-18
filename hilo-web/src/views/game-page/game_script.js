@@ -113,9 +113,10 @@ function displayTime(t){
 
 const config = {
     type : Phaser.AUTO,
+    parent: document.getElementById("gameCanvas"),
     width : 800,
     height : 300,
-    backgroundColor: '#4488aa',
+    backgroundColor: '#ffffff',
     scene : {
         preload : preload,
         create : create,
@@ -127,8 +128,9 @@ function updateRank(){
     document.getElementById("username").innerHTML = clientPlayer.Username + " Rank : " + clientPlayer.Ranking;
 }
 function updateScore(){
-    document.getElementById("score").innerHTML = clientPlayer.Score;
-    console.log(clientPlayer.Score);
+    document.getElementById("score1").innerHTML = clientPlayer.Score;
+    document.getElementById("score2").innerHTML = clientPlayer.Score;
+    //console.log(clientPlayer.Score);
 }
 
 function loadPlayerData(){
@@ -174,10 +176,10 @@ function preload(){
     this.load.image('DiceSix', 'FaceOfDice/six.png');
 }
 
-var dicePosition = [[190, 150], [400, 150], [610,150]];
+var dicePosition = [[150, 150], [400, 150], [650,150]];
 var diceMap = {0 : 'DiceZero', 1 : 'DiceOne', 2 : 'DiceTwo', 3 : 'DiceThree', 4 : 'DiceFour', 5 : 'DiceFive', 6 : 'DiceSix'};
 var choose = -1;
-var scale = 0.2
+var scale = 0.25
 var btn_list = ["hi-Btn", "lo-Btn", "hilo-Btn"];
 
 

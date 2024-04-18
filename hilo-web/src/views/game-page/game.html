@@ -8,6 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script>
 </head>
 <body>
+    
     <div class="container">
         <h1>HiLo Game : <span id = "game-State"></span></h1>
         <p>Current result : <span id="result"></span> <span id = "winning-status"></span></p>
@@ -19,11 +20,11 @@
         <br>
         <button id = "roll-Btn">Roll</button>
         <p id="result"></p>
-        <p>Score: <span id="score">0</span></p>
+        <p>Score: <span id="score1">0</span></p>
         <br>
         <button id="homeButton">Back to Home</button>
     </div>
-    
+    <div id="gameCanvas"></div>
     <div class="container">
         <h1>Account Statistic</h1>
         <h2 id = "username">Rank : </h2>
@@ -64,7 +65,7 @@
         <p id = "auto-Dice-Text", style = "display: inline">0</p>
         <button class = "upgrade-Btn" id = "auto-Dice-Btn" onclick = "upgrade('auto-Dice')">1000</button>
         <br>
-
+        <p>Score: <span id="score2">0</span></p>
         <button id="ruleButton">Rules</button>
     </div>
     
