@@ -295,6 +295,7 @@ function update(time, delta){
             clientPlayer.Score += bet_value * bonus + clientPlayer["base-Add"] + ans;
             updateScore();
             bet_value = 0;
+            i = 0;
             document.getElementById("roll-Btn").removeAttribute("disabled");
         }
         
