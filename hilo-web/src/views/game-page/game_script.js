@@ -277,7 +277,7 @@ function update(time, delta){
             ///////////////////////////////////
 
             if (choice == choose){
-                win.innerHTML = 'You win ' + bet_value * bonus;
+                win.innerHTML = 'You win ' + parseInt(bet_value * bonus);
             }
             else if (choose == -1){
                 win.innerHTML = 'You did not bet';
@@ -292,7 +292,7 @@ function update(time, delta){
                 document.getElementById(btn_list[i]).removeAttribute("disabled");
                 
             }
-            clientPlayer.Score += bet_value * bonus + clientPlayer["base-Add"] + ans;
+            clientPlayer.Score += parseInt(bet_value * bonus + clientPlayer["base-Add"] + ans);
             updateScore();
             bet_value = 0;
             i = 0;
