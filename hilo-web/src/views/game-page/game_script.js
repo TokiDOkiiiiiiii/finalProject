@@ -1,8 +1,10 @@
 //Player structure = {"Username" : , "Password" : , "Score" : , "Ranking" : , "Stat" : }
-var basePlayer = {"Username" : "Username", "Password" : "Password", "Score" : 10, "Ranking" : 1, "rolling-Time" : 15, 
-'high-Mul' : 3, 'low-Mul' : 2, 'hilo-Mul' : 5, 'base-Add' : 0, 'auto-Dice' : 0};
-var clientPlayer = {"Username" : "Client", "Password" : "Password", "Score" : 100, "Ranking" : 0, "rolling-Time" : 5, 
-'high-Mul' : 3, 'low-Mul' : 2, 'hilo-Mul' : 5, 'base-Add' : 0, 'auto-Dice' : 0};
+var basePlayer = {"username" : "Username", "password" : "Password", "Score" : 10, "Ranking" : 1, "rollingTime" : 15, 
+'highMul' : 3, 'lowMul' : 2, 'hiloMul' : 5, 'baseAdd' : 0, 'autoDice' : 0};
+var clientPlayer = {"username" : "Client", "password" : "Password", "Score" : 100, "Ranking" : 0, "rollingTime" : 5, 
+'highMul' : 3, 'lowMul' : 2, 'hiloMul' : 5, 'baseAdd' : 0, 'autoDice' : 0};
+//import clientUser from "../../exportUserTemplate.js";
+const { getUser } = require('./userHandler');
 
 //link to home-page
 document.getElementById("homeButton").addEventListener("click", function() {
@@ -73,13 +75,13 @@ document.getElementById("roll-Btn").addEventListener("click", function(){
 });
 
 function base_price(statType){
-    if (statType === 'auto-Dice'){
+    if (statType === 'autoDice'){
         return 1000;
     }
     else return 10;
 }
 
-var gameStat = ['rolling-Time', 'high-Mul', 'low-Mul', 'hilo-Mul', 'base-Add', 'auto-Dice'];
+var gameStat = ['rollingTime', 'highMul', 'lowMul', 'hiloMul', 'baseAdd', 'autoDice'];
 
 function upgrade(statType){
     if (document.getElementById(statType).value < document.getElementById(statType).max && document.getElementById(statType + '-Btn').innerHTML <= clientPlayer.Score){
@@ -87,10 +89,10 @@ function upgrade(statType){
         clientPlayer.Score -= document.getElementById(statType + '-Btn').innerHTML;
         updateScore();
         document.getElementById(statType).value = parseInt(document.getElementById(statType).value + 1, 10);
-        if (statType === 'auto-Dice' || statType === 'base-Add'){
+        if (statType === 'autoDice' || statType === 'baseAdd'){
             clientPlayer[statType] = clientPlayer[statType] + 1;
         }
-        else if (statType === 'rolling-Time'){
+        else if (statType === 'rollingTime'){
             clientPlayer[statType] = (clientPlayer[statType] * hundredUpgradeStep - 1) / hundredUpgradeStep;   
             timer = clientPlayer[statType] * 1000;
         }
@@ -125,7 +127,7 @@ const config = {
     }
 };
 function updateRank(){
-    document.getElementById("username").innerHTML = clientPlayer.Username + " Rank : " + clientPlayer.Ranking;
+    document.getElementById("username").innerHTML = clientPlayer.username + " Rank : " + clientPlayer.Ranking;
 }
 function updateScore(){
     document.getElementById("score1").innerHTML = clientPlayer.Score;
@@ -146,10 +148,10 @@ function loadPlayerData(){
         var statType = gameStat[i];
         document.getElementById(statType + '-Text').innerHTML = clientPlayer[statType];
         
-        if (statType === 'auto-Dice' || statType === 'base-Add'){
+        if (statType === 'autoDice' || statType === 'baseAdd'){
             document.getElementById(statType).value = clientPlayer[statType];
         }
-        else if (statType === 'rolling-Time'){
+        else if (statType === 'rollingTime'){
             document.getElementById(statType).value = Math.trunc(basePlayer[statType] - clientPlayer[statType]) * hundredUpgradeStep;
             timer = clientPlayer[statType] * 1000;
         }
@@ -166,6 +168,8 @@ function loadPlayerData(){
 }
 
 function preload(){
+    clientPlayer = getUser();
+    
     loadPlayerData();
     this.load.image('DiceZero', 'FaceOfDice/zero.png');
     this.load.image('DiceOne', 'FaceOfDice/one.png');
@@ -197,7 +201,7 @@ function create(){
 function update(time, delta){
     //updateRank();
     
-    if (clientPlayer["auto-Dice"]){
+    if (clientPlayer["autoDice"]){
         startScramble = 1;
         document.getElementById("roll-Btn").setAttribute("disabled", true);
     }
@@ -259,17 +263,17 @@ function update(time, delta){
             if (ans > 11){
                 res.innerHTML = 'High'
                 choice = 0;
-                bonus = clientPlayer["high-Mul"];
+                bonus = clientPlayer["highMul"];
             }
             else if (ans == 11){
                 res.innerHTML = 'Hi-Lo'
                 choice = 1;
-                bonus = clientPlayer["hilo-Mul"];
+                bonus = clientPlayer["hiloMul"];
             }
             else {
                 res.innerHTML = 'Low'
                 choice = 2;
-                bonus = clientPlayer["low-Mul"];
+                bonus = clientPlayer["lowMul"];
             }
             startScramble = false
             lastUpdate = 0;
@@ -294,7 +298,7 @@ function update(time, delta){
                 document.getElementById(btn_list[i]).removeAttribute("disabled");
                 
             }
-            clientPlayer.Score += parseInt(bet_value * bonus + clientPlayer["base-Add"] + ans);
+            clientPlayer.Score += parseInt(bet_value * bonus + clientPlayer["baseAdd"] + ans);
             updateScore();
             bet_value = 0;
             i = 0;
