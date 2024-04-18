@@ -15,21 +15,16 @@ function generateSessionId() {
 module.exports = (req, res) => {
     const { username, password } = req.body;
 
-    User.findOne({ username: username }).then((user) => {
+    User.findOne({ username: username, password: password }).then((user) => {
         if (user) {
-            if (password === user.password) {
-                // Generate a unique session ID
-                const sessionId = generateSessionId();
-                // Store session ID in activeSessions
-                activeSessions[sessionId] = { userId: user._id };
-                // Set session ID in cookie
-                res.cookie('sessionId', sessionId, { httpOnly: true });
+            // Generate a unique session ID
+            const sessionId = generateSessionId();
+            // Store session ID in activeSessions
+            activeSessions[sessionId] = { userId: user._id };
+            // Set session ID in cookie
+            res.cookie('sessionId', sessionId, { httpOnly: true });
 
-                res.redirect('/');
-            } else {
-                //return res.status(400).send("Incorrect password");
-                res.redirect('/login');
-            }
+            res.redirect('/');
         } else {
             //return res.status(400).send("User not found");
             res.redirect('/login');
