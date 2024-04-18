@@ -12,25 +12,33 @@ function generateSessionId() {
     return sessionId;
 }
 
-module.exports = (req, res) => {
-    const { username, password } = req.body;
+module.exports = {
+    loginFunction: (req, res, callback) => {
+        const { username, password } = req.body;
 
-    User.findOne({ username: username, password: password }).then((user) => {
-        if (user) {
-            // Generate a unique session ID
-            const sessionId = generateSessionId();
-            // Store session ID in activeSessions
-            activeSessions[sessionId] = { userId: user._id };
-            // Set session ID in cookie
-            res.cookie('sessionId', sessionId, { httpOnly: true });
+        User.findOne({ username: username, password: password }).then((foundedUser) => {
+            if (foundedUser) {
+                // Set the value of user
+                module.exports.user = foundedUser;
 
-            res.redirect('/');
-        } else {
-            //return res.status(400).send("User not found");
-            res.redirect('/login');
-        }
-    }).catch(err => {
-        console.error(err);
-        return res.status(500).send("Internal Server Error");
-    });
+                // Generate a unique session ID
+                const sessionId = generateSessionId();
+                // Store session ID in activeSessions
+                activeSessions[sessionId] = { userId: foundedUser._id };
+                // Set session ID in cookie
+                res.cookie('sessionId', sessionId, { httpOnly: true });
+
+                // Call the callback function with foundedUser as an argument
+                callback(null, foundedUser);
+
+                res.redirect('/');
+            } else {
+                //return res.status(400).send("User not found");
+                res.redirect('/login');
+            }
+        }).catch(err => {
+            console.error(err);
+            return res.status(500).send("Internal Server Error");
+        });
+    }
 };
