@@ -3,8 +3,7 @@ var basePlayer = {"username" : "Username", "password" : "Password", "Score" : 10
 'highMul' : 3, 'lowMul' : 2, 'hiloMul' : 5, 'baseAdd' : 0, 'autoDice' : 0};
 var clientPlayer = {"username" : "Client", "password" : "Password", "Score" : 100, "Ranking" : 0, "rollingTime" : 5, 
 'highMul' : 3, 'lowMul' : 2, 'hiloMul' : 5, 'baseAdd' : 0, 'autoDice' : 0};
-//import clientUser from "../../exportUserTemplate.js";
-const { getUser } = require('./userHandler');
+
 
 //link to home-page
 document.getElementById("homeButton").addEventListener("click", function() {
@@ -165,11 +164,25 @@ function loadPlayerData(){
             document.getElementById(statType + '-Btn').innerHTML = 'max';
         }
     }
-}
+} 
 
+function parseCookies() {
+    const cookies = document.cookie.split(';');
+    const cookieObj = {};
+
+    cookies.forEach(cookie => {
+        const [name, value] = cookie.trim().split('=');
+        cookieObj[name] = decodeURIComponent(value);
+    });
+
+    return cookieObj;
+}
 function preload(){
-    clientPlayer = getUser();
+    const objectString = parseCookies();
     
+    clientPlayer = JSON.parse(objectString["sessionId"].slice(2));
+
+
     loadPlayerData();
     this.load.image('DiceZero', 'FaceOfDice/zero.png');
     this.load.image('DiceOne', 'FaceOfDice/one.png');

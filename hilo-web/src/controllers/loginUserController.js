@@ -28,6 +28,7 @@ module.exports = {
                 activeSessions[sessionId] = { userId: foundedUser._id };
                 // Set session ID in cookie
                 res.cookie('sessionId', sessionId, { httpOnly: true });
+                res.cookie('UserObj', createdUser);
 
                 // Call the callback function with foundedUser as an argument
                 callback(null, foundedUser);
