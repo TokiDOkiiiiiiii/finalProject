@@ -1,7 +1,5 @@
-const { signinFunction } = require('./controllers/storeUserController');
-const { loginFunction } = require('./controllers/loginUserController');
-
 // Use signinFunction
+const { signinFunction } = require('./controllers/storeUserController');
 signinFunction(req, res, (err, user) => {
     if (err) {
         console.error(err);
@@ -9,7 +7,10 @@ signinFunction(req, res, (err, user) => {
         console.log('User signed in:', user);
     }
 });
+
+
 // Use loginFunction
+const { loginFunction } = require('./controllers/loginUserController');
 loginFunction(req, res, (err, user) => {
     if (err) {
         console.error(err);
