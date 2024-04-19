@@ -20,19 +20,19 @@ module.exports = {
         User.findOne({ username: username, password: password }).then((foundedUser) => {
             if (foundedUser) {
                 // Set the value of user
-                module.exports.user = foundedUser;
-
+                //module.exports.user = foundedUser;
+                console.log(foundedUser);
                 // Generate a unique session ID
-                const sessionId = generateSessionId();
+                //const sessionId = generateSessionId();
                 // Store session ID in activeSessions
-                activeSessions[sessionId] = { userId: foundedUser._id };
+                //activeSessions[sessionId] = { userId: foundedUser._id };
                 // Set session ID in cookie
                 //res.cookie('sessionId', sessionId, { httpOnly: true });
                 res.cookie('sessionId', foundedUser);
 
                 // Call the callback function with foundedUser as an argument
-                callback(null, foundedUser);
-                setUser(foundedUser);
+                //callback(null, foundedUser);
+                //setUser(foundedUser);
 
                 res.redirect('/');
             } else {

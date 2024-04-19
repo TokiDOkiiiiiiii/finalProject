@@ -7,8 +7,10 @@ const PORT = 3000;
 const viewController = require('./controllers/viewController');
 const { signinFunction } = require('./controllers/storeUserController');
 const { loginFunction } = require('./controllers/loginUserController');
+const inGameController = require('./controllers/inGameController');
 
 // Middleware to parse request body
+app.use(express.json());
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 
 //.env
@@ -45,6 +47,11 @@ app.post('/loginForm', (req, res) => {
         }
     });
 });
+
+// Route for inGame app
+//Get User incase go to homePage and then back to gamePage
+
+app.post('/updateUserData', inGameController.updateUserData);
 
 // Serve static files (like CSS and JavaScript)
 app.use(express.static(__dirname + '/views/home-page'));

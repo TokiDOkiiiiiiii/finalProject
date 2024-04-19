@@ -1,7 +1,7 @@
 //Player structure = {"Username" : , "Password" : , "Score" : , "Ranking" : , "Stat" : }
 var basePlayer = {"username" : "Username", "password" : "Password", "Score" : 10, "Ranking" : 1, "rollingTime" : 15, 
 'highMul' : 3, 'lowMul' : 2, 'hiloMul' : 5, 'baseAdd' : 0, 'autoDice' : 0};
-var clientPlayer = {"username" : "Client", "password" : "Password", "Score" : 100, "Ranking" : 0, "rollingTime" : 5, 
+var clientPlayer = {"username" : "Client", "password" : "Password", "Score" : 100, "Ranking" : 0, "rollingTime" : 15, 
 'highMul' : 3, 'lowMul' : 2, 'hiloMul' : 5, 'baseAdd' : 0, 'autoDice' : 0};
 
 
@@ -86,7 +86,7 @@ function upgrade(statType){
     if (document.getElementById(statType).value < document.getElementById(statType).max && document.getElementById(statType + '-Btn').innerHTML <= clientPlayer.Score){
         //Transaction and update to server
         clientPlayer.Score -= document.getElementById(statType + '-Btn').innerHTML;
-        updateScore();
+        
         document.getElementById(statType).value = parseInt(document.getElementById(statType).value + 1, 10);
         if (statType === 'autoDice' || statType === 'baseAdd'){
             clientPlayer[statType] = clientPlayer[statType] + 1;
@@ -94,6 +94,7 @@ function upgrade(statType){
         else if (statType === 'rollingTime'){
             clientPlayer[statType] = (clientPlayer[statType] * hundredUpgradeStep - 1) / hundredUpgradeStep;   
             timer = clientPlayer[statType] * 1000;
+           
         }
         else {
             clientPlayer[statType] = (clientPlayer[statType] * hundredUpgradeStep + 1) / hundredUpgradeStep;
@@ -105,6 +106,7 @@ function upgrade(statType){
             document.getElementById(statType + '-Btn').innerHTML = 'max';
         }
         document.getElementById(statType + "-Text").innerHTML = clientPlayer[statType];
+        updateScore();
     }
 }
 
@@ -125,20 +127,23 @@ const config = {
         
     }
 };
-function updateRank(){
-    document.getElementById("username").innerHTML = clientPlayer.username + " Rank : " + clientPlayer.Ranking;
-}
 function updateScore(){
+    //We need to manipulate db and cookies in this function
+    fetch('/updateUserData', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(clientPlayer)
+    });
+
+    document.getElementById("username").innerHTML = clientPlayer.username + " Rank : " + clientPlayer.Ranking;
     document.getElementById("score1").innerHTML = clientPlayer.Score;
     document.getElementById("score2").innerHTML = clientPlayer.Score;
-    //console.log(clientPlayer.Score);
 }
 
 function loadPlayerData(){
     //Username & Rank
-    updateRank();
-
-
     //Score
     updateScore();
 
@@ -166,6 +171,9 @@ function loadPlayerData(){
     }
 } 
 
+
+
+
 function parseCookies() {
     const cookies = document.cookie.split(';');
     const cookieObj = {};
@@ -174,14 +182,12 @@ function parseCookies() {
         const [name, value] = cookie.trim().split('=');
         cookieObj[name] = decodeURIComponent(value);
     });
-
-    return cookieObj;
+    return JSON.parse(cookieObj["sessionId"].slice(2));
 }
-function preload(){
-    const objectString = parseCookies();
-    
-    clientPlayer = JSON.parse(objectString["sessionId"].slice(2));
 
+function preload(){
+    //console.log(data);
+    clientPlayer = parseCookies();
 
     loadPlayerData();
     this.load.image('DiceZero', 'FaceOfDice/zero.png');
@@ -322,6 +328,5 @@ function update(time, delta){
     }
     
 }
-
 let game = new Phaser.Game(config);
 
