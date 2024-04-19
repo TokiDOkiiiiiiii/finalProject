@@ -5,9 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
-    <link rel="stylesheet" href="global.css">
     <link rel="stylesheet" href="home_style.css">
-
     <style>
         @keyframes slideIn {
             from {
@@ -20,7 +18,6 @@
                 transform: translateY(0);
             }
         }
-
         .animated {
             animation: slideIn 0.5s ease forwards;
         }
@@ -28,22 +25,20 @@
 </head>
 
 <body>
-    <div class="content-wrapper"> <!-- Close the opening tag here -->
-        <h1 id="welcomeText" class="animated">
-            Welcome to
-        </h1>
-        <h2 id="hiLoHeader" class="animated">
-            HiLo 🎲
-        </h2>
-        <div id="buttonsContainer" class="animated">
-            <button id="gameButton">
-                Game
-            </button>
-            <button id="loginButton">
-                Login or change account
-            </button>
-        </div>
-    </div> <!-- This is where you close the div -->
+    <h1 id="welcomeText" class="animated">
+        Welcome to
+    </h1>
+    <h2 id="hiLoHeader" class="animated">
+        HiLo 🎲
+    </h2>
+    <div id="buttonsContainer" class="animated">
+        <button id="gameButton">
+            Game
+        </button>
+        <button id="loginButton">
+            Login or change account
+        </button>
+    </div>
     <script src="home_script.js"></script>
     <script>
         function generateRandomEmoji() {
