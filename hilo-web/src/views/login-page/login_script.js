@@ -3,7 +3,7 @@ document.getElementById("homeButton").addEventListener("click", function() {
     window.location.href = "/";
 });
 
-//log in error
+log in error
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('loginForm').addEventListener('submit', function(event) {
         var username = document.getElementById('username').value;

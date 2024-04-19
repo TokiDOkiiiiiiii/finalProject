@@ -1,0 +1,36 @@
+.navbar {
+    background: #464746;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: white;
+}
+
+.navdiv {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+}
+
+.logo a {
+    font-size: 30px;
+    font-weight: 600;
+    color: white;
+    padding-left: 20px;
+}
+
+.navbar-button {
+    background-color: #464746;
+    color: #fff;
+    margin-top: 0px;
+    font-weight: lighter;
+    border-radius: 40px;
+}
+
+.navbar-button:hover {
+    background-color: #ea4221;
+}

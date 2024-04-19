@@ -2,34 +2,43 @@
 
 body {
     display: flex;
-    align-items: center;
-    
     flex-direction: column;
     height: 100vh;
     margin: 0;
-    background-color: #3e1b1b;
+    background-color: #63696a;
     font-family: 'Nunito', sans-serif;
 }
 
-h1,
+h1 {
+    color: #fff;
+    font-size: 70px;
+    text-align: center;
+    margin: 0 0 0px;
+}
+
 h2 {
     color: #fff;
-    font-size: 75px;
+    font-size: 90px;
+    font: bold;
     text-align: center;
-    margin: 5px 0;
+    height: 120px;
+    margin: 0;
 }
 
 button {
-    background-color: #3e8fe5;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 5px;
+    background-color: #93c247;
+    color: #00224d;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 10px;
     cursor: pointer;
     margin-top: 10px;
+    font-size: 15px;
+    font-weight: bold;
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #60812a;
 }
 
 .container {
@@ -42,9 +51,108 @@ button:hover {
 }
 
 .content-wrapper {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
+}
+
+.navbar {
+    background: #464746;
+    padding: 10px 20px;
+    border-radius: 15px;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.navbar a {
+    text-decoration: none;
+    text-emphasis-color: white;
+}
+
+.navdiv {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+}
+
+.logo {
+    font-size: 30px;
+    background-color: #464746;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 40px;
+    margin-top: 0px;
+    padding: 10px 20px;
+}
+
+.logo:hover {
+    background-color: #a698c5;
+}
+
+.navbar-button-one {
+    background-color: #464746;
+    color: #fff;
+    margin-top: 0px;
+    font-weight: lighter;
+    border-radius: 40px;
+    padding: 15px 20px;
+}
+
+.navbar-button-two:hover {
+    background-color: #ea4221;
+}
+
+.navbar-button-two {
+    background-color: #464746;
+    color: #fff;
+    margin-top: 0px;
+    font-weight: lighter;
+    border-radius: 40px;
+}
+
+.navbar-button-one:hover {
+    background-color: #1a8ab7;
+}
+
+.emoji-one {
+    position: absolute;
+    right: 150px;
+    bottom: 330px;
+    font-size: 100px;
+    rotate: -12deg;
+}
+
+.emoji-two {
+    position: absolute;
+    left: 150px;
+    bottom: 330px;
+    font-size: 100px;
+    rotate: 12deg;
+}
+
+.emoji-three {
+    position: absolute;
+    right: 250px;
+    bottom: 20px;
+    font-size: 100px;
+    rotate: 10deg;
+}
+
+.emoji-four {
+    position: absolute;
+    left: 250px;
+    bottom: 20px;
+    font-size: 100px;
+    rotate: -10deg;
+}
+
+.acronym {
+    font-size: 20px;
+    padding-top: 10px;
+    padding-bottom: 20px;
 }
