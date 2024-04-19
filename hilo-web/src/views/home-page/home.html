@@ -5,12 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
+    <link rel="stylesheet" href="global.css">
     <link rel="stylesheet" href="home_style.css">
+    <link rel="stylesheet" href="nav_bar_style.css">
+
     <style>
         @keyframes slideIn {
             from {
                 opacity: 0;
-                transform: translateY(50px);
+                transform: translateY(20px);
             }
 
             to {
@@ -18,27 +21,92 @@
                 transform: translateY(0);
             }
         }
+
         .animated {
             animation: slideIn 0.5s ease forwards;
+        }
+
+        .bottom-text {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 10px 20px;
+            border-radius: 5px;
+            z-index: 999;
+        }
+
+        .show {
+            display: block;
         }
     </style>
 </head>
 
 <body>
-    <h1 id="welcomeText" class="animated">
-        Welcome to
-    </h1>
-    <h2 id="hiLoHeader" class="animated">
-        HiLo 🎲
-    </h2>
-    <div id="buttonsContainer" class="animated">
-        <button id="gameButton">
-            Game
-        </button>
-        <button id="loginButton">
-            Login or change account
-        </button>
-    </div>
+    <nav class="navbar">
+        <div class="navdiv">
+            <button class="logo" id="backHome">
+                <span class="button-text">HiLo</span>
+            </button>
+            <button class="navbar-button-one" id="about">
+                <span class="button-text">About Us</span>
+            </button>
+            <button class="navbar-button-two" id="loginButton">
+                <i data-lucide="log-in"></i>
+            </button>
+        </div>
+    </nav>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+
+
+    <div class="content-wrapper"> 
+        <h1 id="welcomeText" class="animated">
+            Welcome to
+        </h1>
+        <h2 id="hiLoHeader" class="animated">
+            HiLo 🎲
+        </h2>
+
+        <h1 id="acronym" class="acronym">
+            Highly. Interactive. Ludic. Outrageously fun.
+        </h1>
+
+        <div id="buttonsContainer">
+            <button id="gameButton">
+                Enter Our Game
+            </button>
+
+        </div>
+
+        <div id="emojiContainer" class="animated">
+            <h1 class="emoji-one">
+                🃏
+            </h1>
+
+            <h1 class="emoji-two">
+                🎰
+            </h1>
+
+            <h1 class="emoji-three">
+                💸
+            </h1>
+
+            <h1 class="emoji-four">
+                🧧
+            </h1>
+        </div>
+
+        <div class="bottom-text" id="bottomText">
+            This is some text at the bottom!
+        </div>
+    </div> 
+
     <script src="home_script.js"></script>
     <script>
         function generateRandomEmoji() {
@@ -50,9 +118,12 @@
             return emojiList[randomIndex];
         }
 
+
+
         const welcomeText = document.getElementById("welcomeText");
         const hiLoHeader = document.getElementById("hiLoHeader");
         const buttonsContainer = document.getElementById("buttonsContainer");
+        const emojiContainer = document.getElementById("emojiContainer");
 
         function isInViewport(element) {
             const rect = element.getBoundingClientRect();
@@ -66,13 +137,16 @@
 
         function handleScroll() {
             if (isInViewport(welcomeText)) {
-                welcomeText.classList.add('animated');
+                welcomeText.classList.add("animated");
             }
             if (isInViewport(hiLoHeader)) {
-                hiLoHeader.classList.add('animated');
+                hiLoHeader.classList.add("animated");
             }
             if (isInViewport(buttonsContainer)) {
-                buttonsContainer.classList.add('animated');
+                buttonsContainer.classList.add("animated");
+            }
+            if (isInViewport(buttonsContainer)) {
+                buttonsContainer.classList.add("animated")
             }
 
             const randomEmoji = generateRandomEmoji();
