@@ -5,7 +5,8 @@ const PORT = 3000;
 
 //controllers
 const viewController = require('./controllers/viewController');
-const storeUserController = require('./controllers/storeUserController');
+const { signinFunction } = require('./controllers/storeUserController');
+const { loginFunction } = require('./controllers/loginUserController');
 
 // Middleware to parse request body
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
@@ -16,13 +17,34 @@ require('dotenv').config();
 //Mongodb connectios
 mongoose.connect(process.env.MONGO_URL, {useNewUrlParser: true});
 
+// Store active sessions
+const activeSessions = {};
+// Export activeSessions for use in other files
+module.exports.activeSessions = activeSessions;
+
 // Define routes
 app.get('/', viewController.home);
 app.get('/game', viewController.game);
 app.get('/signin', viewController.signin);
 app.get('/login', viewController.login);
-app.post('/signinForm', storeUserController);
-app.post('/loginForm', storeUserController);
+app.post('/signinForm', (req, res) => {
+    signinFunction(req, res, (err, user) => {
+        if (err) {
+            console.error(err);
+        } else {
+            console.log('User signed in:', user);
+        }
+    });
+});
+app.post('/loginForm', (req, res) => {
+    loginFunction(req, res, (err, user) => {
+        if (err) {
+            console.error(err);
+        } else {
+            console.log('User signed in:', user);
+        }
+    });
+});
 
 // Serve static files (like CSS and JavaScript)
 app.use(express.static(__dirname + '/views/home-page'));
