@@ -14,10 +14,6 @@ const UserSchema = new Schema({
         type: Number,
         default: 100
     },
-    Ranking: {
-        type: Number,
-        default: 0
-    },
     rollingTime: {
         type: Number,
         default: 15

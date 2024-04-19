@@ -1,7 +1,7 @@
 //Player structure = {"Username" : , "Password" : , "Score" : , "Ranking" : , "Stat" : }
-var basePlayer = {"username" : "Username", "password" : "Password", "Score" : 10, "Ranking" : 1, "rollingTime" : 15, 
+var basePlayer = {"username" : "Username", "password" : "Password", "Score" : 100, "rollingTime" : 15, 
 'highMul' : 3, 'lowMul' : 2, 'hiloMul' : 5, 'baseAdd' : 0, 'autoDice' : 0};
-var clientPlayer = {"username" : "Client", "password" : "Password", "Score" : 100, "Ranking" : 0, "rollingTime" : 15, 
+var clientPlayer = {"username" : "Client", "password" : "Password", "Score" : 100, "rollingTime" : 15, 
 'highMul' : 3, 'lowMul' : 2, 'hiloMul' : 5, 'baseAdd' : 0, 'autoDice' : 0};
 
 
@@ -32,7 +32,7 @@ var res = document.getElementById("result");
 var win = document.getElementById("winning-status");
 var bet = document.getElementById("bet-value");
 var gameState = document.getElementById("game-State");
-var hundredUpgradeStep = 10;
+var hundredUpgradeStep = 1;
 
 
 function getRandomInt() {
@@ -75,7 +75,7 @@ document.getElementById("roll-Btn").addEventListener("click", function(){
 
 function base_price(statType){
     if (statType === 'autoDice'){
-        return 1000;
+        return 150;
     }
     else return 10;
 }
@@ -87,14 +87,13 @@ function upgrade(statType){
         //Transaction and update to server
         clientPlayer.Score -= document.getElementById(statType + '-Btn').innerHTML;
         
-        document.getElementById(statType).value = parseInt(document.getElementById(statType).value + 1, 10);
+        document.getElementById(statType).value = document.getElementById(statType).value + 1, 10;
         if (statType === 'autoDice' || statType === 'baseAdd'){
             clientPlayer[statType] = clientPlayer[statType] + 1;
         }
         else if (statType === 'rollingTime'){
             clientPlayer[statType] = (clientPlayer[statType] * hundredUpgradeStep - 1) / hundredUpgradeStep;   
             timer = clientPlayer[statType] * 1000;
-           
         }
         else {
             clientPlayer[statType] = (clientPlayer[statType] * hundredUpgradeStep + 1) / hundredUpgradeStep;
@@ -137,7 +136,7 @@ function updateScore(){
         body: JSON.stringify(clientPlayer)
     });
 
-    document.getElementById("username").innerHTML = clientPlayer.username + " Rank : " + clientPlayer.Ranking;
+    document.getElementById("username").innerHTML = "Username : " +clientPlayer.username;
     document.getElementById("score1").innerHTML = clientPlayer.Score;
     document.getElementById("score2").innerHTML = clientPlayer.Score;
 }
