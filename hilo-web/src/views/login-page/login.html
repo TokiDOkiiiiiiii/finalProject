@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,13 +9,11 @@
         .error {
             color: red;
         }
-
         .error-border {
             border: 2px solid red;
         }
     </style>
 </head>
-
 <body>
     <!-- <h1>Login</h1>
     <form id="loginForm" action="/loginForm" method="POST">
@@ -38,17 +35,16 @@
                 Log In
             </h1>
             <div class="input-box">
-                <input type="text" placeholder="Username" id="username" required><br><br>
+                <input type="text" placeholder="Username" id="username" name="username" required><br><br>
             </div>
             <div class="input-box">
-                <input type="password" placeholder="Password" id="password" required><br><br>
+                <input type="password" placeholder="Password" id="password" name="password" required><br><br>
             </div>
 
             <div id="error-message" class="error"></div>
 
-            <button type="submit" class="btn">
-                Log In
-            </button>
+            <input type="submit" class="btn" value="Login">
+                
 
             <div class="register-link">
                 <p>
@@ -66,7 +62,6 @@
     <script>
         lucide.createIcons();
     </script>
-
+    
 </body>
-
 </html>
