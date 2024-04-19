@@ -14,7 +14,7 @@ document.getElementById("homeButton").addEventListener("click", function() {
 ///Rule page is not implemented///
 //link to rule-page
 document.getElementById("ruleButton").addEventListener("click", function(){
-    window.location.href = "/rules";
+    window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D";
 });
 
 //////////////
