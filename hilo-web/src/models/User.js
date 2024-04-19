@@ -12,23 +12,23 @@ const UserSchema = new Schema({
     },
     Score: {
         type: Number,
-        default: 100
+        default: 0
     },
     rollingTime: {
         type: Number,
-        default: 15
+        default: 0
     },
     highMul: {
         type: Number,
-        default: 3
+        default: 0
     },
     lowMul: {
         type: Number,
-        default: 2
+        default: 0
     },
     hiloMul: {
         type: Number,
-        default: 5
+        default: 0
     },
     baseAdd: {
         type: Number,
