@@ -1,3 +1,16 @@
+// link to login page
+document.getElementById("loginButton").addEventListener("click", function() {
+    window.location.href = "/login";
+});
+
+document.getElementById("about").addEventListener("click", function() {
+    window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUXbmV2ZXIgZ29ubmEgZ2l2ZSB5b3UgdXA%3D.com"; // Replace this with your YouTube URL
+});
+
+document.getElementById("backHome").addEventListener("click", function() {
+    window.location.href = "/";
+});
+
 //Player structure = {"Username" : , "Password" : , "Score" : , "Ranking" : , "Stat" : }
 var basePlayer = {"username" : "Username", "password" : "Password", "Score" : 10, "Ranking" : 1, "rollingTime" : 15, 
 'highMul' : 3, 'lowMul' : 2, 'hiloMul' : 5, 'baseAdd' : 0, 'autoDice' : 0};
@@ -5,10 +18,10 @@ var clientPlayer = {"username" : "Client", "password" : "Password", "Score" : 10
 'highMul' : 3, 'lowMul' : 2, 'hiloMul' : 5, 'baseAdd' : 0, 'autoDice' : 0};
 
 
-//link to home-page
-document.getElementById("homeButton").addEventListener("click", function() {
-    window.location.href = "/";
-});
+// //link to home-page
+// document.getElementById("homeButton").addEventListener("click", function() {
+//     window.location.href = "/";
+// });
 
 
 ///Rule page is not implemented///

@@ -61,7 +61,7 @@ button:hover {
 
 .navbar {
     background: #464746;
-    padding: 10px 20px;
+    padding: 7px 20px;
     border-radius: 15px;
     margin-top: 20px;
     margin-left: 20px;
@@ -101,6 +101,7 @@ button:hover {
     font-weight: lighter;
     border-radius: 40px;
     padding: 15px 20px;
+    justify-content: center;
 }
 
 .navbar-button-two:hover {

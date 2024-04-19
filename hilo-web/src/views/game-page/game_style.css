@@ -1,7 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&display=swap');
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    background-color: #63696a;
+    font-family: 'Nunito', sans-serif;
 }
 
 .container {
@@ -16,11 +21,16 @@ body {
 }
 
 button {
-    margin: 10px;
-    padding: 10px 20px;
-    font-size: 16px;
+    background-color: #93c247;
+    color: #00224d;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 10px;
     cursor: pointer;
-    
+    margin-top: 10px;
+    font-size: 15px;
+    font-weight: bold;
+
 }
 
 .upgrade-Btn{
@@ -39,4 +49,65 @@ canvas {
     align-items: center;
     width : 100%;
     height : 100%;
+}
+
+.navbar {
+    background: #464746;
+    padding: 7px 20px;
+    border-radius: 15px;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.navbar a {
+    text-decoration: none;
+    text-emphasis-color: white;
+}
+
+.navdiv {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+}
+
+.logo {
+    font-size: 30px;
+    background-color: #464746;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 40px;
+    margin-top: 0px;
+    padding: 10px 20px;
+}
+
+.logo:hover {
+    background-color: #a698c5;
+}
+
+.navbar-button-one {
+    background-color: #464746;
+    color: #fff;
+    margin-top: 0px;
+    font-weight: lighter;
+    border-radius: 40px;
+    padding: 15px 20px;
+    justify-content: center;
+}
+
+.navbar-button-two:hover {
+    background-color: #ea4221;
+}
+
+.navbar-button-two {
+    background-color: #464746;
+    color: #fff;
+    margin-top: 0px;
+    font-weight: lighter;
+    border-radius: 40px;
+}
+
+.navbar-button-one:hover {
+    background-color: #1a8ab7;
 }
