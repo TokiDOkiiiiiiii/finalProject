@@ -105,15 +105,16 @@ button:hover {
 }
 
 .navbar-button-two:hover {
-    background-color: #ea4221;
+    background-color: #872411;
 }
 
 .navbar-button-two {
-    background-color: #464746;
+    background-color: #ea4221;
     color: #fff;
     margin-top: 0px;
     font-weight: lighter;
-    border-radius: 40px;
+    border-radius: 30px;
+    padding: 10px 17px;
 }
 
 .navbar-button-one:hover {
