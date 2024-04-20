@@ -1,6 +1,5 @@
 const User = require('../models/User');
 const activeSessions = require('../server');
-const { setUser } = require('./getUserController');
 
 function generateSessionId() {
     // Generate a random string for session ID

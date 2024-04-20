@@ -1,6 +1,5 @@
 const User = require('../models/User');
 const activeSessions = require('../server');
-const { setUser } = require('./getUserController');
 
 function generateSessionId() {
     // Generate a random string for session ID
@@ -33,7 +32,7 @@ module.exports = {
 
                     // Call the callback function with createdUser as an argument
                     callback(null, createdUser);
-                    setUser(createdUser);
+                    //setUser(createdUser);
 
                     res.redirect('/');
                 }).catch(err => {
