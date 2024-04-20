@@ -99,18 +99,30 @@ function upgrade(statType){
     if (document.getElementById(statType).value < document.getElementById(statType).max && document.getElementById(statType + '-Btn').innerHTML <= clientPlayer.Score){
         //Transaction and update to server
         clientPlayer.Score -= document.getElementById(statType + '-Btn').innerHTML;
-        
         document.getElementById(statType).value = document.getElementById(statType).value + 1, 10;
-        if (statType === 'autoDice' || statType === 'baseAdd'){
-            clientPlayer[statType] = clientPlayer[statType] + 1;
+        if (statType === 'autoDice'){
+            clientPlayer.autoDice = clientPlayer.autoDice + 1;
         }
+        else if (statType === 'baseAdd'){
+            clientPlayer.baseAdd = clientPlayer.baseAdd + 1;
+        }
+
         else if (statType === 'rollingTime'){
-            clientPlayer[statType] = (clientPlayer[statType] * hundredUpgradeStep - 1) / hundredUpgradeStep;   
+            clientPlayer.rollingTime = (clientPlayer.rollingTime * hundredUpgradeStep - 1) / hundredUpgradeStep;   
             timer = clientPlayer[statType] * 1000;
         }
-        else {
-            clientPlayer[statType] = (clientPlayer[statType] * hundredUpgradeStep + 1) / hundredUpgradeStep;
+        else if (statType === 'highMul'){
+            console.log("YES");
+            clientPlayer.highMul = (clientPlayer.highMul * hundredUpgradeStep + 1) / hundredUpgradeStep;
+            console.log(clientPlayer.highMul);
         }
+        else if (statType === 'lowMul'){
+            clientPlayer.lowMul = (clientPlayer.lowMul * hundredUpgradeStep + 1) / hundredUpgradeStep;
+        }
+        else if (statType === 'hiloMul'){
+            clientPlayer.hiloMul = (clientPlayer.hiloMul * hundredUpgradeStep + 1) / hundredUpgradeStep;
+        }
+
         if (document.getElementById(statType).value < document.getElementById(statType).max){
             document.getElementById(statType + '-Btn').innerHTML = document.getElementById(statType).value * 10 + base_price(statType);
         }
@@ -118,6 +130,8 @@ function upgrade(statType){
             document.getElementById(statType + '-Btn').innerHTML = 'max';
         }
         document.getElementById(statType + "-Text").innerHTML = clientPlayer[statType];
+        console.log(clientPlayer.highMul);
+        //console.log(clientPlayer);
         updateScore();
     }
 }
@@ -141,6 +155,7 @@ const config = {
 };
 function updateScore(){
     //We need to manipulate db and cookies in this function
+    //console.log(clientPlayer);
     fetch('/updateUserData', {
         method: 'POST',
         headers: {
