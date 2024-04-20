@@ -15,7 +15,8 @@ module.exports = {
                     baseAdd : req.body.baseAdd,
                     autoDice : req.body.autoDice
                 });
-            res.cookie('sessionId', curUser)
+            console.log(curUser);
+            res.cookie('sessionId', curUser);
         }
         catch (e) {
             res.status(501).json({ error: "Not Implemented" });

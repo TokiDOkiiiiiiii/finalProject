@@ -1,29 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&display=swap');
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    background-color: #63696a;
+    font-family: 'Nunito', sans-serif;
 }
 
-.container {
+.wrapper {
+    width: 500px;
+    background-color: #464746;
+    color: white;
+    border-radius: 20px;
+    padding: 30px 40px;
+    justify-content: center;
+    align-items: center;
+}
+
+/* .container {
+    display: flexbox;
     max-width: 400px;
     margin: 50px auto;
     padding: 20px;
-    background-color: #fff;
-    border-radius: 5px;
+    background-color: #464746;
+    border-radius: 20px;
     text-align: center;
-    width : 100%;
+    width: 100%;
     height: 100%;
-}
+    align-items: center;
+    color: white;
+} */
 
-button {
-    margin: 10px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
+.container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
     
 }
 
-.upgrade-Btn{
+.box-1,
+.box-2 {
+    width: calc(50% - 10px);
+    background-color: #464746;
+    color: white;
+    border-radius: 20px;
+    padding: 30px 40px;
+}
+
+.box-1 {
+    margin-top: 20px;
+    margin-right: 50px;
+}
+
+.box-2 {
+    margin-top: 20px;
+    margin-left: 50px;
+}
+
+button {
+    background-color: #93c247;
+    color: #00224d;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.upgrade-Btn {
     margin: 5px;
     padding: 5px 10px;
 }
@@ -32,11 +82,107 @@ button {
     font-weight: bold;
 }
 
-canvas {   
+canvas {
     max-width: 500px;
-    display : block;   
-    margin : 10px auto;
+    display: block;
+    margin: 10px auto;
     align-items: center;
-    width : 100%;
-    height : 100%;
+    width: 100%;
+    height: 100%;
+}
+
+.navbar {
+    background: #464746;
+    padding: 7px 20px;
+    border-radius: 15px;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.navbar a {
+    text-decoration: none;
+    text-emphasis-color: white;
+}
+
+.navdiv {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+}
+
+.logo {
+    font-size: 30px;
+    background-color: #464746;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 40px;
+    margin-top: 0px;
+    padding: 10px 20px;
+}
+
+.logo:hover {
+    background-color: #a698c5;
+}
+
+.navbar-button-one {
+    background-color: #464746;
+    color: #fff;
+    margin-top: 0px;
+    font-weight: lighter;
+    border-radius: 40px;
+    padding: 15px 20px;
+    justify-content: center;
+}
+
+.navbar-button-two:hover {
+    background-color: #872411;
+}
+
+.navbar-button-two {
+    background-color: #ea4221;
+    color: #fff;
+    margin-top: 0px;
+    font-weight: lighter;
+    border-radius: 30px;
+    padding: 10px 17px;
+}
+
+.navbar-button-one:hover {
+    background-color: #1a8ab7;
+}
+
+.input-box {
+    display: inline-block;
+    /* Ensure the input box is inline */
+    position: relative;
+    /* Ensure positioning context for the absolute icon */
+    margin-right: 10px;
+    /* Add margin right to create space between elements */
+}
+
+#bet-value {
+    padding: 10px;
+    border: none;
+    border: 2px solid #6c6e6c;
+    /* Change border color to red */
+    border-radius: 5px;
+    font-size: 16px;
+    /* Adjust the width to accommodate the icon */
+    box-sizing: border-box;
+    /* Ensures padding and border are included in the element's total width */
+    background-color: transparent;
+    /* Change background color to red */
+    color: white;
+
+}
+
+.input-box i {
+    position: absolute;
+    right: 10px;
+    /* Adjust the position to match the padding */
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
 }

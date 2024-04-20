@@ -1,41 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&display=swap');
+
 body {
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
     height: 100vh;
     margin: 0;
-    background-color: #f0f0f0;
+    background-color: #63696a;
+    font-family: 'Nunito', sans-serif;
 }
 
 h1 {
-    color: #333;
-    font-size: 50px;
-    margin-bottom: 5px;
+    color: #fff;
+    font-size: 70px;
     text-align: center;
-    background-color: #f0f0f0;
+    margin: 0 0 0px;
 }
 
 h2 {
-    color: #333;
-    font-size: 70px;
-    margin-top: 0;
-    margin-bottom: 0;
+    color: #fff;
+    font-size: 90px;
+    font: bold;
     text-align: center;
-    background-color: #f0f0f0;
+    height: 120px;
+    margin: 0;
 }
 
 button {
-    background-color: #3e8fe5;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 5px;
+    background-color: #93c247;
+    color: #00224d;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 10px;
     cursor: pointer;
     margin-top: 10px;
+    font-size: 15px;
+    font-weight: bold;
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #60812a;
 }
 
 .container {
@@ -45,4 +48,113 @@ button:hover {
     background-color: #fff;
     border-radius: 5px;
     text-align: center;
+}
+
+.content-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.navbar {
+    background: #464746;
+    padding: 7px 20px;
+    border-radius: 15px;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.navbar a {
+    text-decoration: none;
+    text-emphasis-color: white;
+}
+
+.navdiv {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+}
+
+.logo {
+    font-size: 30px;
+    background-color: #464746;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 40px;
+    margin-top: 0px;
+    padding: 10px 20px;
+}
+
+.logo:hover {
+    background-color: #a698c5;
+}
+
+.navbar-button-one {
+    background-color: #464746;
+    color: #fff;
+    margin-top: 0px;
+    font-weight: lighter;
+    border-radius: 40px;
+    padding: 15px 20px;
+    justify-content: center;
+}
+
+.navbar-button-two:hover {
+    background-color: #872411;
+}
+
+.navbar-button-two {
+    background-color: #ea4221;
+    color: #fff;
+    margin-top: 0px;
+    font-weight: lighter;
+    border-radius: 30px;
+    padding: 10px 17px;
+}
+
+.navbar-button-one:hover {
+    background-color: #1a8ab7;
+}
+
+.emoji-one {
+    position: absolute;
+    right: 150px;
+    bottom: 330px;
+    font-size: 100px;
+    rotate: -12deg;
+}
+
+.emoji-two {
+    position: absolute;
+    left: 150px;
+    bottom: 330px;
+    font-size: 100px;
+    rotate: 12deg;
+}
+
+.emoji-three {
+    position: absolute;
+    right: 250px;
+    bottom: 20px;
+    font-size: 100px;
+    rotate: 10deg;
+}
+
+.emoji-four {
+    position: absolute;
+    left: 250px;
+    bottom: 20px;
+    font-size: 100px;
+    rotate: -10deg;
+}
+
+.acronym {
+    font-size: 20px;
+    padding-top: 10px;
+    padding-bottom: 20px;
 }
