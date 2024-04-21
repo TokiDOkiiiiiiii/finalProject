@@ -1,10 +1,17 @@
 // link to home page
-document.getElementById("homeButton").addEventListener("click", function() {
-    window.location.href = "/";
-});
+// document.getElementById("homeButton").addEventListener("click", function() {
+//     window.location.href = "/";
+// });
 
 //log in error
 document.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const error = urlParams.get('error');
+    if (error === "401") {
+        console.log("Invalid username or password.");
+        document.getElementById('error-message').innerHTML = "Invalid username or password.";
+    }
+
     document.getElementById('loginForm').addEventListener('submit', function(event) {
         var username = document.getElementById('username').value;
         var password = document.getElementById('password').value;

@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&display=swap');
-
 body {
     display: flex;
     flex-direction: column;
@@ -9,6 +8,13 @@ body {
     font-family: 'Nunito', sans-serif;
 }
 
+nav{
+    font-family: 'Nunito', sans-serif;
+}
+
+div {
+    font-family: 'Nunito', sans-serif;
+}
 h1 {
     color: #fff;
     font-size: 70px;
@@ -35,6 +41,7 @@ button {
     margin-top: 10px;
     font-size: 15px;
     font-weight: bold;
+    font-family: 'Nunito', sans-serif;
 }
 
 button:hover {
@@ -66,6 +73,8 @@ button:hover {
     margin-top: 20px;
     margin-left: 20px;
     margin-right: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
 }
 
 .navbar a {
@@ -115,6 +124,7 @@ button:hover {
     font-weight: lighter;
     border-radius: 30px;
     padding: 10px 17px;
+    align-items: center;
 }
 
 .navbar-button-one:hover {
@@ -127,6 +137,30 @@ button:hover {
     bottom: 330px;
     font-size: 100px;
     rotate: -12deg;
+}
+
+@media screen and (max-width: 800px){
+    .content-wrapper {
+        padding: 20px;
+    }
+
+    .emoji-three {
+        display: none;
+    }
+
+    .emoji-four {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 600px){
+    .emoji-one {
+        display: none;
+    }
+
+    .emoji-two {
+        display: none;
+    }
 }
 
 .emoji-two {

@@ -35,23 +35,30 @@ body {
 
 .container {
     display: flex;
-    justify-content: space-between;
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 20px;
+    width: 100%;
+}
+
+@media screen and (max-width: 600px) {
+    .container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
     
 }
 
 .box-1,
 .box-2 {
-    width: calc(50% - 10px);
+    margin: 20px;
+    min-width: 0px;
+    flex: 1;
     background-color: #464746;
     color: white;
     border-radius: 20px;
     padding: 30px 40px;
 }
 
-.box-1 {
+/* .box-1 {
     margin-top: 20px;
     margin-right: 50px;
 }
@@ -59,7 +66,7 @@ body {
 .box-2 {
     margin-top: 20px;
     margin-left: 50px;
-}
+} */
 
 button {
     background-color: #93c247;
@@ -143,9 +150,10 @@ canvas {
 .navbar-button-two {
     background-color: #464746;
     color: #fff;
-    margin-top: 0px;
+    /* margin-top: 0px; */
     font-weight: lighter;
     border-radius: 40px;
+    align-items: center;
 }
 
 .navbar-button-one:hover {
