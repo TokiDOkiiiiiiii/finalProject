@@ -38,7 +38,7 @@ app.post('/signinForm', (req, res) => {
         }
     });
 });
-app.post('/loginForm', (req, res) => {
+app.post('/login', (req, res) => {
     loginFunction(req, res, (err, user) => {
         if (err) {
             console.error(err);

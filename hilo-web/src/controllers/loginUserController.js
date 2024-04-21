@@ -28,15 +28,14 @@ module.exports = {
                 // Set session ID in cookie
                 //res.cookie('sessionId', sessionId, { httpOnly: true });
                 res.cookie('sessionId', foundedUser);
-
                 // Call the callback function with foundedUser as an argument
                 //callback(null, foundedUser);
                 //setUser(foundedUser);
 
                 res.redirect('/');
             } else {
-                //return res.status(400).send("User not found");
-                res.redirect('/login');
+                res.redirect('/login?error=401');
+                // res.redirect('/login');
             }
         }).catch(err => {
             console.error(err);

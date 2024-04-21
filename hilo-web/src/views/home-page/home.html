@@ -54,7 +54,7 @@
                 <span class="button-text">About Us</span>
             </button>
             <button class="navbar-button-two" id="loginButton">
-                <i data-lucide="users"></i>
+                <i data-lucide="log-in"></i>
             </button>
         </div>
     </nav>
@@ -135,27 +135,27 @@
             );
         }
 
-        function handleScroll() {
-            if (isInViewport(welcomeText)) {
-                welcomeText.classList.add("animated");
-            }
-            if (isInViewport(hiLoHeader)) {
-                hiLoHeader.classList.add("animated");
-            }
-            if (isInViewport(buttonsContainer)) {
-                buttonsContainer.classList.add("animated");
-            }
-            if (isInViewport(buttonsContainer)) {
-                buttonsContainer.classList.add("animated")
-            }
+        // function handleScroll() {
+        //     if (isInViewport(welcomeText)) {
+        //         welcomeText.classList.add("animated");
+        //     }
+        //     if (isInViewport(hiLoHeader)) {
+        //         hiLoHeader.classList.add("animated");
+        //     }
+        //     if (isInViewport(buttonsContainer)) {
+        //         buttonsContainer.classList.add("animated");
+        //     }
+        //     if (isInViewport(buttonsContainer)) {
+        //         buttonsContainer.classList.add("animated")
+        //     }
 
-            const randomEmoji = generateRandomEmoji();
-            const emojiSpan = document.createElement('span');
-            emojiSpan.textContent = randomEmoji;
-            hiLoHeader.appendChild(emojiSpan);
+        //     const randomEmoji = generateRandomEmoji();
+        //     const emojiSpan = document.createElement('span');
+        //     emojiSpan.textContent = randomEmoji;
+        //     hiLoHeader.appendChild(emojiSpan);
 
-            window.removeEventListener('scroll', handleScroll);
-        }
+        //     window.removeEventListener('scroll', handleScroll);
+        // }
 
         window.addEventListener('scroll', handleScroll);
     </script>
