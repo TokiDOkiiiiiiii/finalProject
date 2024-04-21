@@ -163,7 +163,6 @@ function updateScore(){
         },
         body: JSON.stringify(clientPlayer)
     });
-
     document.getElementById("username").innerHTML = "Username : " +clientPlayer.username;
     document.getElementById("score1").innerHTML = clientPlayer.Score;
     document.getElementById("score2").innerHTML = clientPlayer.Score;

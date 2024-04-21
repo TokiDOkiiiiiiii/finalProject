@@ -12,15 +12,55 @@ function generateSessionId() {
     return sessionId;
 }
 
+async function simulateBcrypt(password, saltRounds) {
+    console.log('simulateBcrypt');
+    const encoder = new TextEncoder();
+
+    // Generate a random salt
+    const salt = crypto.getRandomValues(new Uint8Array(16));
+
+    // Encode password as Uint8Array
+    let hash = encoder.encode(password);
+    let salted = new Uint8Array(hash.length + salt.length);
+    salted.set(hash);
+    salted.set(salt, hash.length);
+    console.log(salted);
+    // Perform multiple rounds of hashing
+    for (let i = 0; i < saltRounds; i++) { // Default rounds to 10 if saltRounds is undefined
+        console.log('begin')
+        hash = await crypto.subtle.digest('SHA-256', salted);
+        salted = new Uint8Array(hash.byteLength + salt.byteLength);
+        salted.set(new Uint8Array(hash));
+        salted.set(salt, hash.byteLength);
+    }
+    console.log('end')
+    // Convert the final hash to a hex string and append the salt as hex
+    const hashHex = Array.from(new Uint8Array(hash))
+        .map(b => b.toString(16).padStart(2, '0'))
+        .join('');
+    const saltHex = Array.from(salt)
+        .map(b => b.toString(16).padStart(2, '0'))
+        .join('');
+
+    return hashHex + saltHex;
+}
+
+// Example usage:
+
+
 module.exports = {
-    signinFunction: (req, res, callback) => {
+    signinFunction: async (req, res, callback) => {
         const { username, password } = req.body;
 
-        User.findOne({ username: username, password: password }).then((user) => {
+        User.findOne({ username: username, password: password }).then(async (user) => {
             if (user) {
                 res.redirect('/login')
             } else {
-                User.create(req.body).then((createdUser) => {
+
+                User.create({
+                    ...req.body,
+                    password: await simulateBcrypt(req.body.password, 1)
+                }).then((createdUser) => {
 
                     // Generate a unique session ID
                     const sessionId = generateSessionId();

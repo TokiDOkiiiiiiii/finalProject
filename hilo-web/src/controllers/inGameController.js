@@ -19,6 +19,7 @@ module.exports = {
             const curUser = await User.findOne({username : req.body.username, password : req.body.password});
             console.log(curUser);
             res.cookie('sessionId', curUser);
+            res.status(200).json(curUser);
         }
         catch (e) {
             res.status(501).json({ error: "Not Implemented" });
