@@ -12,9 +12,9 @@ document.getElementById("backHome").addEventListener("click", function() {
 });
 
 //Player structure = {"Username" : , "Password" : , "Score" : , "Ranking" : , "Stat" : }
-var basePlayer = {"username" : "Username", "password" : "Password", "Score" : 100, "rollingTime" : 15, 
+var basePlayer = {"username" : "Username", "password" : "Password", "Score" : 100, "Ranking" : 0, "rollingTime" : 15, 
 'highMul' : 3, 'lowMul' : 2, 'hiloMul' : 5, 'baseAdd' : 0, 'autoDice' : 0};
-var clientPlayer = {"username" : "Client", "password" : "Password", "Score" : 100, "rollingTime" : 15, 
+var clientPlayer = {"username" : "Client", "password" : "Password", "Score" : 100, "Ranking" : 0, "rollingTime" : 15, 
 'highMul' : 3, 'lowMul' : 2, 'hiloMul' : 5, 'baseAdd' : 0, 'autoDice' : 0};
 
 
@@ -62,21 +62,21 @@ function resetBetButtonColor(){
 
 document.getElementById("hi-Btn").addEventListener("click", function(){
     resetBetButtonColor();
-    bet_value = document.getElementById("bet-value").value;
+    //bet_value = document.getElementById("bet-value").value;
     document.getElementById("hi-Btn").style.backgroundColor = '#04AA6D';
     choose = 0;
 });
 
 document.getElementById("lo-Btn").addEventListener("click", function(){
     resetBetButtonColor();
-    bet_value = document.getElementById("bet-value").value;
+    //bet_value = document.getElementById("bet-value").value;
     document.getElementById("lo-Btn").style.backgroundColor = '#04AA6D';
     choose = 2;
 });
 
 document.getElementById("hilo-Btn").addEventListener("click", function(){
     resetBetButtonColor();
-    bet_value = document.getElementById("bet-value").value;
+    //bet_value = document.getElementById("bet-value").value;
     document.getElementById("hilo-Btn").style.backgroundColor = '#04AA6D';
     choose = 1;
 });
@@ -112,9 +112,9 @@ function upgrade(statType){
             timer = clientPlayer[statType] * 1000;
         }
         else if (statType === 'highMul'){
-            console.log("YES");
+            //console.log("YES");
             clientPlayer.highMul = (clientPlayer.highMul * hundredUpgradeStep + 1) / hundredUpgradeStep;
-            console.log(clientPlayer.highMul);
+            //console.log(clientPlayer.highMul);
         }
         else if (statType === 'lowMul'){
             clientPlayer.lowMul = (clientPlayer.lowMul * hundredUpgradeStep + 1) / hundredUpgradeStep;
@@ -130,9 +130,9 @@ function upgrade(statType){
             document.getElementById(statType + '-Btn').innerHTML = 'max';
         }
         document.getElementById(statType + "-Text").innerHTML = clientPlayer[statType];
-        console.log(clientPlayer.highMul);
-        //console.log(clientPlayer);
+        
         updateScore();
+        
     }
 }
 
@@ -154,24 +154,30 @@ const config = {
     }
 };
 function updateScore(){
-    //We need to manipulate db and cookies in this function
-    //console.log(clientPlayer);
+    //Send data to update the data in DB, also save cookie
     fetch('/updateUserData', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(clientPlayer)
-    });
-    document.getElementById("username").innerHTML = "Username : " +clientPlayer.username;
+    })
+    //console.log(clientPlayer);
     document.getElementById("score1").innerHTML = clientPlayer.Score;
     document.getElementById("score2").innerHTML = clientPlayer.Score;
+    
+
+}
+function updateRank(){
+    document.getElementById("username").innerHTML = "Username : " +clientPlayer.username + " Rank : " + clientPlayer.Ranking;
 }
 
 function loadPlayerData(){
-    //Username & Rank
-    //Score
-    updateScore();
+    //Load all player data from cookies
+    //updateScore();
+    updateRank();
+    document.getElementById("score1").innerHTML = clientPlayer.Score;
+    document.getElementById("score2").innerHTML = clientPlayer.Score;
 
     //Stat
     for (let i = 0; i < gameStat.length; i++){
@@ -214,8 +220,10 @@ function parseCookies() {
 function preload(){
     //console.log(data);
     clientPlayer = parseCookies();
-
     loadPlayerData();
+    //document.getElementById("username").innerHTML = "Username : " +clientPlayer.username + " Rank : " + clientPlayer.Ranking;
+
+    
     this.load.image('DiceZero', 'FaceOfDice/zero.png');
     this.load.image('DiceOne', 'FaceOfDice/one.png');
     this.load.image('DiceTwo', 'FaceOfDice/two.png');
@@ -242,10 +250,19 @@ function create(){
     //this.dice1.setTexture('DiceOne');
 }
 
+var appTime = 0;
 //If bet is larger than score
 function update(time, delta){
     //updateRank();
-    
+
+    appTime += delta;
+    if (appTime >= 5000){       //Load Ranking from cookie every 5 secs
+        updateScore();  //Idlly update rank
+        clientPlayer.Ranking = parseCookies().Ranking;
+        console.log(clientPlayer.Ranking);
+        updateRank();
+        appTime = 0;
+    }
     if (clientPlayer["autoDice"]){
         startScramble = 1;
         document.getElementById("roll-Btn").setAttribute("disabled", true);
@@ -258,9 +275,10 @@ function update(time, delta){
         
         if (lastUpdate > timer - 1000 && lastUpdate < timer){  
             if (i == 0){
+                bet_value = document.getElementById("bet-value").value;
                 if (bet_value < 0 || bet_value > clientPlayer.Score || choose == -1){
-                    console.log(bet_value);
-                    console.log(clientPlayer.Score);
+                    //console.log(bet_value);
+                    //console.log(clientPlayer.Score);
                     bet_value = 0;
                     bet.value = 0;
                     resetBetButtonColor();
@@ -328,7 +346,7 @@ function update(time, delta){
             ///////////////////////////////////
 
             if (choice == choose){
-                win.innerHTML = 'You win ' + parseInt(bet_value * bonus);
+                win.innerHTML = 'You win ' + (bet_value * bonus);
             }
             else if (choose == -1){
                 win.innerHTML = 'You did not bet';
@@ -343,7 +361,8 @@ function update(time, delta){
                 document.getElementById(btn_list[i]).removeAttribute("disabled");
                 
             }
-            clientPlayer.Score += parseInt(bet_value * bonus + clientPlayer["baseAdd"] + ans);
+
+            clientPlayer.Score += (bet_value * bonus + clientPlayer["baseAdd"] + ans);
             updateScore();
             bet_value = 0;
             i = 0;
