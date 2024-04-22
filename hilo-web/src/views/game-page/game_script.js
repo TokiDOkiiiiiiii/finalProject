@@ -165,7 +165,9 @@ function updateScore(){
     //console.log(clientPlayer);
     document.getElementById("score1").innerHTML = clientPlayer.Score;
     document.getElementById("score2").innerHTML = clientPlayer.Score;
-    
+    appTime = 0;
+    clientPlayer.Ranking = parseCookies().Ranking;
+    updateRank();
 
 }
 function updateRank(){
@@ -254,13 +256,14 @@ var appTime = 0;
 //If bet is larger than score
 function update(time, delta){
     //updateRank();
+    // clientPlayer.Ranking = parseCookies().Ranking;
+    // updateRank();
 
     appTime += delta;
-    if (appTime >= 5000){       //Load Ranking from cookie every 5 secs
+    if (appTime >= 7000){       //Load Ranking from cookie every 5 secs
         updateScore();  //Idlly update rank
-        clientPlayer.Ranking = parseCookies().Ranking;
-        console.log(clientPlayer.Ranking);
-        updateRank();
+        // console.log(clientPlayer.Ranking);
+        // updateRank();
         appTime = 0;
     }
     if (clientPlayer["autoDice"]){
