@@ -16,4 +16,15 @@ document.getElementById("backHome").addEventListener("click", function() {
     window.location.href = "/";
 });
 
-console.log(document.cookie);
+//Check if cookie exist
+const cookies = document.cookie.split(';');
+const cookieObj = {};
+
+cookies.forEach(cookie => {
+    const [name, value] = cookie.trim().split('=');
+    cookieObj[name] = decodeURIComponent(value);
+});
+//console.log(cookieObj["sessionId"]);
+if (cookieObj["sessionId"] === undefined){
+    document.getElementById("gameButton").setAttribute("disabled", true);
+}

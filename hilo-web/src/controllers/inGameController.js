@@ -30,24 +30,7 @@ module.exports = {
                     autoDice : req.body.autoDice,
                     Ranking : rank
                 });
-            // var listRank = await User.aggregate([
-            //     {sort : {Score : -1}},
-            //     {project: {username : 1, _id : -1}}
-            //  ]);
-            //console.log("HELP");
-            //console.log(listRank);
-            //const curUser = await User.findOne({username : req.body.username, password : req.body.password});
-            // for (var i = 0; i < listRank.length; i++){
-            //     //console.log(JSON.stringify(listRank[i]._id));
-            //     if (listRank[i].username== req.body.username){
-            //         curUser.Ranking = i + 1;
-            //         //console.log(i + 1);
-            //     }
-            // }
-            //console.log(curUser);
-            //res.cookie('rank', {"Ranking" : curUser.Ranking});
-            //UpdateCookie
-            //console.log(curUser.Score)
+            console.log(rank);
             req.body.Ranking = rank;
             res.cookie('sessionId', req.body);
             //console.log(rank ,req.body.Ranking);

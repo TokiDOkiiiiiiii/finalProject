@@ -166,8 +166,7 @@ function updateScore(){
     document.getElementById("score1").innerHTML = clientPlayer.Score;
     document.getElementById("score2").innerHTML = clientPlayer.Score;
     appTime = 0;
-    clientPlayer.Ranking = parseCookies().Ranking;
-    updateRank();
+    
 
 }
 function updateRank(){
@@ -256,8 +255,8 @@ var appTime = 0;
 //If bet is larger than score
 function update(time, delta){
     //updateRank();
-    // clientPlayer.Ranking = parseCookies().Ranking;
-    // updateRank();
+    clientPlayer.Ranking = parseCookies().Ranking;
+    updateRank();
 
     appTime += delta;
     if (appTime >= 7000){       //Load Ranking from cookie every 5 secs
