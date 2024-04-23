@@ -59,7 +59,7 @@ module.exports = {
 
                 User.create({
                     ...req.body,
-                    password: await simulateBcrypt(req.body.password, 1)
+                    //password: await simulateBcrypt(req.body.password, 1)
                 }).then((createdUser) => {
 
                     // Generate a unique session ID

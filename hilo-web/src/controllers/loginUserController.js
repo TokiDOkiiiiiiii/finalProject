@@ -50,15 +50,16 @@ module.exports = {
     loginFunction: (req, res, callback) => {
         const { username, password } = req.body;
 
-        User.findOne({ username: username}).then((foundedUser) => {
+        User.findOne({ username: username, password : password}).then((foundedUser) => {
             if (foundedUser) {
                 // Set the value of user
                 //module.exports.user = foundedUser;
                 console.log(foundedUser);
-                if (!verifyPassword(password, foundedUser.password, 1)) {
-                    res.redirect('/login?error=401');
-                    return;
-                }
+                // if (!verifyPassword(password, foundedUser.password, 1)) {
+                //     res.redirect('/login?error=401');
+                //     return;
+                // }
+                
                 // Generate a unique session ID
                 //const sessionId = generateSessionId();
                 // Store session ID in activeSessions

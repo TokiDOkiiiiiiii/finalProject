@@ -151,15 +151,60 @@ button:hover {
     .emoji-four {
         display: none;
     }
+
+    h1 {
+        font-size: 70px;
+        margin-bottom: 0px;
+    }
+
+    h2 {
+        font-size: 90px;
+        margin-bottom: 0px;
+    }
+
+    .emoji-one,
+    .emoji-two {
+        font-size: 100px !important;
+        bottom: 330px !important;
+    }
+
+
 }
 
 @media screen and (max-width: 600px){
-    .emoji-one {
+    /* .emoji-one {
         display: none;
     }
 
     .emoji-two {
         display: none;
+    } */
+
+    h1 {
+        font-size: 50px;
+    }
+
+    h2 {
+        font-size: 70px;
+    }
+
+    .emoji-one,
+    .emoji-two {
+        font-size: 80px !important;
+        bottom: 330px !important;
+    }
+
+    .emoji-one {
+        right: 90px !important;
+    }
+
+    .emoji-two {
+        left: 90px !important;
+    }
+    
+    .acronym {
+        font-size: 20px !important;
+        margin-top: 0;
     }
 }
 

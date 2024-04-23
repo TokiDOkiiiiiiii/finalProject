@@ -46,11 +46,133 @@ div {
     width: 100%;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 880px) {
+
+    #hi-Btn,
+    #lo-Btn,
+    #hilo-Btn {
+        margin: 0px !important;
+        /* Adjust the margin value to create more space */
+    }
+
+    .box-1 button {
+        font-size: 12px;
+        padding: 10px 15px;
+    }
+
+    .container .box-2 h1,
+    .container .box-2 h2,
+    .container .box-2 p,
+    .container .box-2 label {
+        font-size: 20px !important;
+    }
+}
+
+@media screen and (max-width: 880px) {
     .container {
         display: flex;
         flex-direction: column;
         width: 100%;
+    }
+
+    .container .box-2 p {
+        font-size: 20px !important;
+    }
+
+    .container .box-2 h1,
+    .container .box-2 h2,
+    .container .box-2 p,
+    .container .box-2 label {
+        font-size: 20px !important;
+    }
+
+    .progress-bar {
+        flex: 1;
+        width: 70%;
+        margin-left: -30px !important;
+    }
+
+    button {
+        font-size: 10px;
+    }
+
+    #roll-Btn {
+        font-size: 15px;
+    }
+
+    .logo {
+        font-size: 25px;
+    }
+
+    .container .box-1 h1 {
+        font-size: 25px !important;
+    }
+
+    #highMul-Text {
+        margin: 0;
+    }
+
+    /* Adjust button styles for smaller screens */
+    .box-1 button {
+        font-size: 12px;
+        padding: 10px 15px;
+    }
+
+    /* Ensure buttons in box-1 stay on the same line */
+    .box-1 button {
+        white-space: nowrap;
+        /* Prevent button text from wrapping */
+        margin-right: 5px;
+        /* Add spacing between buttons */
+    }
+
+    #hi-Btn,
+    #lo-Btn,
+    #hilo-Btn {
+        margin: 0px !important;
+        /* Adjust the margin value to create more space */
+    }
+
+    #baseAdd-Text {
+        font-size: 12px !important; /* Adjust the font size as needed */
+    }   
+
+   
+}
+
+@media screen and (max-width: 400px) {
+    #highMul-Text,
+    #lowMul-Text,
+    #rollingTime-Text,
+    #hiloMul-Text,
+    #baseAdd-Text,
+    #autoDice-Text {
+        font-size: 12px !important;
+    }
+
+    .progress-bar {
+        width: 90% !important; /* Increase the width of the progress bar */
+        margin-left: 5% !important; /* Adjust the margin to center the progress bar */
+    }
+
+    .upgrade-content {
+        justify-content: flex-end !important; /* Move the content to the right side */
+        margin-left: auto !important; /* Align the content to the right */
+    }
+
+    #highMul-Text,
+    #lowMul-Text,
+    #rollingTime-Text,
+    #hiloMul-Text,
+    #baseAdd-Text,
+    #autoDice-Text {
+        margin-right: 0px !important; /* Add margin to the right side of the text */
+    }
+
+    .progress-bar {
+        flex: 1;
+        width: 70%;
+        margin-left: -40px !important;
     }
 
 }
@@ -259,12 +381,16 @@ canvas {
     flex: 1;
     display: flex;
     align-items: center;
+    margin-left: -15px;
 }
 
 .progress-bar {
     flex: 1;
-    margin-left: 10px;
+    margin-left: 0px;
+    /* Set the desired width here */
+    width: 50%;
 }
+
 .box-2 h1,
 .box-2 h2,
 .box-2 p,
@@ -272,19 +398,46 @@ canvas {
     font-size: 25px;
 }
 
+.box-2 p {
+    font-size: 25px;
+}
+
 .box-2 progress {
-    height: 20px;
+    height: 15px;
 }
 
 .box-2 p {
-    font-size: 18px;
+    font-size: 13px;
     margin-top: 0;
 }
 
 #ruleButton {
-    font-size: 30px;
+    font-size: 20px;
 }
 
 .box-2 h2 {
     margin-top: 0;
+}
+
+#highMul-Text,
+#lowMul-Text,
+#rollingTime-Text,
+#hiloMul-Text,
+#baseAdd-Text,
+#autoDice-Text {
+    margin: 10px;
+    /* Reset margin to remove floating */
+}
+
+#highMul-Text,
+#lowMul-Text,
+#rollingTime-Text,
+#hiloMul-Text,
+#baseAdd-Text,
+#autoDice-Text {
+    font-size: 20px;
+}
+
+.container .box-2 p {
+    font-size: 25px;
 }
