@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="game_style.css">
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script>
 </head>
+
 <body>
 
     <nav class="navbar">
@@ -33,7 +35,7 @@
             <h1>
                 Hilo Game : <span id="game-State"></span>
             </h1>
-            
+
             <h2>
                 Current result : <span id="result"></span>
                 <span id="winning-status"></span>
@@ -62,11 +64,11 @@
             </div>
 
             <br>
-            
+
             <button id="roll-Btn">
                 Roll
             </button>
-            
+
             <h1>
                 Score <span id="score1">0</span>
             </h1>
@@ -74,20 +76,54 @@
             <br>
 
             <div id="gameCanvas"></div>
+
         </div>
-        
+
         <div class="box-2">
             <h1>
                 Account Statistic
             </h1>
             <h2 id="username">
-                Rank : 
+                Rank :
             </h2>
             <h2>
                 Upgrade
             </h2>
-            
-            <label for="file">
+
+            <div class="upgrade-item">
+                <div class="upgrade-label">
+                    <label for="rollingTime">Rolling Time :</label>
+                </div>
+                <div class="upgrade-content">
+                    <progress id="rollingTime" value="0" max="10" class="progress-bar"></progress>
+                    <p id="rollingTime-Text">0</p>
+                    <button class="upgrade-Btn" id="rollingTime-Btn" onclick="upgrade('rollingTime')">10</button>
+                </div>
+            </div>
+
+            <div class="upgrade-item">
+                <div class="upgrade-label">
+                    <label for="highMul">Hi Multiplier :</label>
+                </div>
+                <div class="upgrade-content">
+                    <progress id="highMul" value="0" max="10" class="progress-bar"></progress>
+                    <p id="highMul-Text">3</p>
+                    <button class="upgrade-Btn" id="highMul-Btn" onclick="upgrade('highMul')">10</button>
+                </div>
+            </div>
+
+            <div class="upgrade-item">
+                <div class="upgrade-label">
+                    <label for="lowMul">Lo Multiplier :</label>
+                </div>
+                <div class="upgrade-content">
+                    <progress id="lowMul" value="0" max="10" class="progress-bar"></progress>
+                    <p id="lowMul-Text">2</p>
+                    <button class="upgrade-Btn" id="lowMul-Btn" onclick="upgrade('lowMul')">10</button>
+                </div>
+            </div>
+
+            <!-- <label for="file">
                 Rolling Time : 
             </label>
             <progress id="rollingTime" value="0" max="10" style="display: inline"></progress>
@@ -121,9 +157,9 @@
             <button class="upgrade-Btn" id="lowMul-Btn" onclick="upgrade('lowMul')">
                 10
             </button>
-            <br>
+            <br> -->
 
-            <label for="file">
+            <!-- <label for="file">
                 HiLo Multipler : 
             </label>
             <progress id="hiloMul" value="0" max="10" style="display: inline"></progress>
@@ -133,9 +169,21 @@
             <button class="upgrade-Btn" id="hiloMul-Btn" onclick="upgrade('hiloMul')">
                 10
             </button>
-            <br>
+            <br> -->
 
-            <label for="file">
+            <div class="upgrade-item">
+                <div class="upgrade-label">
+                    <label for="hiloMul">HiLo Multiplier :</label>
+                </div>
+                <div class="upgrade-content">
+                    <progress id="hiloMul" value="0" max="10" class="progress-bar"></progress>
+                    <p id="hiloMul-Text">5</p>
+                    <button class="upgrade-Btn" id="hiloMul-Btn" onclick="upgrade('hiloMul')">10</button>
+                </div>
+            </div>
+
+
+            <!-- <label for="file">
                 Base Addition : 
             </label>
             <progress id="baseAdd" value="0" max="10" style="display: inline"></progress>
@@ -145,9 +193,20 @@
             <button class="upgrade-Btn" id="baseAdd-Btn" onclick="upgrade('baseAdd')">
                 10
             </button>
-            <br>
+            <br> -->
 
-            <label for="file">
+            <div class="upgrade-item">
+                <div class="upgrade-label">
+                    <label for="baseAdd">Base Addition :</label>
+                </div>
+                <div class="upgrade-content">
+                    <progress id="baseAdd" value="0" max="10" class="progress-bar"></progress>
+                    <p id="baseAdd-Text">0</p>
+                    <button class="upgrade-Btn" id="baseAdd-Btn" onclick="upgrade('baseAdd')">10</button>
+                </div>
+            </div>
+
+            <!-- <label for="file">
                 Automa Dice : 
             </label>
             <progress id="autoDice" value="0" max="1" style="display: inline"></progress>
@@ -157,7 +216,19 @@
             <button class="upgrade-Btn" id="autoDice-Btn" onclick="upgrade('autoDice')">
                 1000
             </button>
-            <br>
+            <br> -->
+
+            <div class="upgrade-item">
+                <div class="upgrade-label">
+                    <label for="autoDice">Automa Dice :</label>
+                </div>
+                <div class="upgrade-content">
+                    <progress id="autoDice" value="0" max="1" class="progress-bar"></progress>
+                    <p id="autoDice-Text">0</p>
+                    <button class="upgrade-Btn" id="autoDice-Btn" onclick="upgrade('autoDice')">150</button>
+                </div>
+            </div>
+            
             <p>
                 Score: <span id="score2">0</span>
             </p>
@@ -166,7 +237,8 @@
             </button>
         </div>
     </div>
-    
+
     <script src="game_script.js"></script>
 </body>
+
 </html>

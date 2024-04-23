@@ -15,3 +15,5 @@ document.getElementById("about").addEventListener("click", function() {
 document.getElementById("backHome").addEventListener("click", function() {
     window.location.href = "/";
 });
+
+console.log(document.cookie);

@@ -9,6 +9,14 @@ body {
     font-family: 'Nunito', sans-serif;
 }
 
+nav {
+    font-family: 'Nunito', sans-serif;
+}
+
+div {
+    font-family: 'Nunito', sans-serif;
+}
+
 .wrapper {
     width: 500px;
     background-color: #464746;
@@ -44,11 +52,25 @@ body {
         flex-direction: column;
         width: 100%;
     }
-    
+
 }
 
 .box-1,
 .box-2 {
+    margin: 20px;
+    min-width: 0px;
+    flex: 1;
+    background-color: #464746;
+    color: white;
+    border-radius: 20px;
+    padding: 30px 40px;
+}
+
+.box-1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     margin: 20px;
     min-width: 0px;
     flex: 1;
@@ -80,6 +102,20 @@ button {
     font-weight: bold;
 }
 
+#hi-Btn,
+#lo-Btn,
+#hilo-Btn {
+    margin: 10px;
+    /* Adjust the margin value to create more space */
+}
+
+#roll-Btn {
+    margin-top: 0px;
+    background-color: #ea4221;
+    color: white;
+    font-size: 20px
+}
+
 .upgrade-Btn {
     margin: 5px;
     padding: 5px 10px;
@@ -105,6 +141,8 @@ canvas {
     margin-top: 20px;
     margin-left: 20px;
     margin-right: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
 }
 
 .navbar a {
@@ -144,15 +182,16 @@ canvas {
 }
 
 .navbar-button-two:hover {
-    background-color: #ea4221;
+    background-color: #872411;
 }
 
 .navbar-button-two {
-    background-color: #464746;
+    background-color: #ea4221;
     color: #fff;
-    /* margin-top: 0px; */
+    margin-top: 0px;
     font-weight: lighter;
-    border-radius: 40px;
+    border-radius: 30px;
+    padding: 10px 17px;
     align-items: center;
 }
 
@@ -192,4 +231,60 @@ canvas {
     top: 50%;
     transform: translateY(-50%);
     font-size: 20px;
+}
+
+.box-2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.upgrade-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+    margin-right: 40px;
+}
+
+.upgrade-label {
+    flex: 1;
+    text-align: right;
+    margin-right: 50px;
+}
+
+.upgrade-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.progress-bar {
+    flex: 1;
+    margin-left: 10px;
+}
+.box-2 h1,
+.box-2 h2,
+.box-2 p,
+.box-2 label {
+    font-size: 25px;
+}
+
+.box-2 progress {
+    height: 20px;
+}
+
+.box-2 p {
+    font-size: 18px;
+    margin-top: 0;
+}
+
+#ruleButton {
+    font-size: 30px;
+}
+
+.box-2 h2 {
+    margin-top: 0;
 }
